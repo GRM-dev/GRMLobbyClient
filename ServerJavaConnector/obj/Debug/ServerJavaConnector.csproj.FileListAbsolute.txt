@@ -1,0 +1,17 @@
+c:\users\łukasz\documents\visual studio 2013\Projects\ServerJavaConnector\ServerJavaConnector\bin\Debug\ServerJavaConnector.exe.config
+c:\users\łukasz\documents\visual studio 2013\Projects\ServerJavaConnector\ServerJavaConnector\bin\Debug\ServerJavaConnector.exe
+c:\users\łukasz\documents\visual studio 2013\Projects\ServerJavaConnector\ServerJavaConnector\bin\Debug\ServerJavaConnector.pdb
+c:\users\łukasz\documents\visual studio 2013\Projects\ServerJavaConnector\ServerJavaConnector\obj\Debug\ServerJavaConnector.csprojResolveAssemblyReference.cache
+c:\users\łukasz\documents\visual studio 2013\Projects\ServerJavaConnector\ServerJavaConnector\obj\Debug\MainWindow.baml
+c:\users\łukasz\documents\visual studio 2013\Projects\ServerJavaConnector\ServerJavaConnector\obj\Debug\MainWindow.g.cs
+c:\users\łukasz\documents\visual studio 2013\Projects\ServerJavaConnector\ServerJavaConnector\obj\Debug\App.g.cs
+c:\users\łukasz\documents\visual studio 2013\Projects\ServerJavaConnector\ServerJavaConnector\obj\Debug\ServerJavaConnector_MarkupCompile.cache
+c:\users\łukasz\documents\visual studio 2013\Projects\ServerJavaConnector\ServerJavaConnector\obj\Debug\ServerJavaConnector.g.resources
+c:\users\łukasz\documents\visual studio 2013\Projects\ServerJavaConnector\ServerJavaConnector\obj\Debug\ServerJavaConnector.Properties.Resources.resources
+c:\users\łukasz\documents\visual studio 2013\Projects\ServerJavaConnector\ServerJavaConnector\obj\Debug\ServerJavaConnector.csproj.GenerateResource.Cache
+c:\users\łukasz\documents\visual studio 2013\Projects\ServerJavaConnector\ServerJavaConnector\obj\Debug\ServerJavaConnector.exe
+c:\users\łukasz\documents\visual studio 2013\Projects\ServerJavaConnector\ServerJavaConnector\obj\Debug\ServerJavaConnector.pdb
+c:\users\łukasz\documents\visual studio 2013\Projects\ServerJavaConnector\ServerJavaConnector\obj\Debug\XAML\AppLocalDictionary.baml
+c:\users\łukasz\documents\visual studio 2013\Projects\ServerJavaConnector\ServerJavaConnector\obj\Debug\App.baml
+c:\users\łukasz\documents\visual studio 2013\Projects\ServerJavaConnector\ServerJavaConnector\obj\Debug\GeneratedInternalTypeHelper.g.cs
+c:\Users\Łukasz\Documents\Visual Studio 2013\Projects\ServerJavaConnector\ServerJavaConnector\obj\Debug\ServerJavaConnector_MarkupCompile.lref
