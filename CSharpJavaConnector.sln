@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerJavaConnector", "ServerJavaConnector\ServerJavaConnector.csproj", "{E8AC2F49-15AB-48DD-AC69-BB72BF236010}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpJavaConnector", "ServerJavaConnector\CSharpJavaConnector.csproj", "{E8AC2F49-15AB-48DD-AC69-BB72BF236010}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

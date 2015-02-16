@@ -20,14 +20,22 @@ namespace ServerJavaConnector.Core
                     MainWindow mwindow = MainWindow.instance;
                     while (mwindow.Conn.Connected)
                     {
-                        Console.Out.WriteLine("FFF");
                         String msg = conn.receivePacket();
-                        mwindow.Dispatcher.BeginInvoke(new Action(() =>
-                           {
-                               Console.Out.WriteLine("ggg");
-                               mwindow.ConsoleOutput.Text += msg;
-                           }));
-                        Thread.Sleep(1000);
+                        if (!msg.Equals(""))
+                        {
+                            mwindow.Dispatcher.BeginInvoke(new Action(() =>
+                            {
+                                   mwindow.ConsoleOutput.Text += msg+"\n";
+                               }));
+                        }
+                        try
+                        {
+                            Thread.Sleep(1000);
+                        }
+                        catch (ThreadInterruptedException e)
+                        {
+                            Console.Out.WriteLine(e.Message);
+                        }
                     }
                 });
         }

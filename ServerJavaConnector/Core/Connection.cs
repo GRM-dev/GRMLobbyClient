@@ -15,7 +15,7 @@ namespace ServerJavaConnector.Core
         private static String serverIP = "91.230.204.135";
         private static String localIP = "127.0.0.1";
         private static int MIN_PORT = 4343;
-        private static int MAX_PORT = 4360;
+        private static int MAX_PORT = 4350;
         private Socket clientSocket;
         private Boolean _connected = false;
         private MessageListener listener;
@@ -49,11 +49,19 @@ namespace ServerJavaConnector.Core
         public string receivePacket()
         {
             byte[] rcvLenBytes = new byte[4];
-            clientSocket.Receive(rcvLenBytes);
-            int rcvLen = System.BitConverter.ToInt32(rcvLenBytes, 0);
-            byte[] rcvBytes = new byte[rcvLen];
-            clientSocket.Receive(rcvBytes);
-            String rcv = System.Text.Encoding.ASCII.GetString(rcvBytes);
+            String rcv="";
+            try
+            {
+                clientSocket.Receive(rcvLenBytes);
+                int rcvLen = System.BitConverter.ToInt32(rcvLenBytes, 0);
+                byte[] rcvBytes = new byte[rcvLen];
+                clientSocket.Receive(rcvBytes);
+                 rcv = System.Text.Encoding.ASCII.GetString(rcvBytes);
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e.Message);
+            }
             return rcv;
         }
 

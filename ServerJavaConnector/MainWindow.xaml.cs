@@ -40,8 +40,6 @@ namespace ServerJavaConnector
             try
             {
                 Conn.sendPacket(ConsoleInput.Text);
-                //String rec = Conn.receivePacket();
-                //ConsoleOutput.Text += rec + "\n";
                 ConsoleInput.Text = "";
             }
             catch (Exception ex)
