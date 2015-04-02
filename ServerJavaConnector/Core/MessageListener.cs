@@ -8,54 +8,60 @@ using System.Threading.Tasks;
 
 namespace ServerJavaConnector.Core
 {
-    class MessageListener
+    public class MessageListener
     {
         private Thread listenerThread;
+        private Boolean listening;
 
         public MessageListener(Connection conn)
         {
-            this.conn = conn;
-            listenerThread = new Thread(() =>
+            this.Conn = conn;
+        }
+
+        public void run()
+        {
+            MainWindow mwindow = MainWindow.instance;
+            while (mwindow.Conn.Connected && listening)
+            {
+                String msg = Conn.receivePacket();
+                if (!msg.Equals(""))
                 {
-                    MainWindow mwindow = MainWindow.instance;
-                    while (mwindow.Conn.Connected)
+                    mwindow.Dispatcher.BeginInvoke(new Action(() =>
                     {
-                        String msg = conn.receivePacket();
-                        if (!msg.Equals(""))
-                        {
-                            mwindow.Dispatcher.BeginInvoke(new Action(() =>
-                            {
-                                   mwindow.ConsoleOutput.Text += msg+"\n";
-                               }));
-                        }
-                        try
-                        {
-                            Thread.Sleep(1000);
-                        }
-                        catch (ThreadInterruptedException e)
-                        {
-                            Console.Out.WriteLine(e.Message);
-                        }
-                    }
-                });
+                        mwindow.ConsoleOutput.Text += msg + "\n";
+                    }));
+                }
+                try
+                {
+                    Thread.Sleep(1000);
+                }
+                catch (ThreadInterruptedException e)
+                {
+                    Console.Out.WriteLine(e.Message);
+                }
+            }
         }
 
         public void startListening()
         {
-            if (listenerThread != null)
+            if (listenerThread == null && !listening)
             {
+                listening = true;
+                listenerThread = new Thread(() => run());
                 listenerThread.Start();
             }
         }
 
         public void stopListening()
         {
-            if (listenerThread != null)
+            if (listenerThread != null && listening)
             {
-                listenerThread.Interrupt();
+                listening = false;
+                listenerThread.Abort();
+                listenerThread = null;
             }
         }
 
-        public Connection conn { get; private set; }
+        public Connection Conn { get; private set; }
     }
 }

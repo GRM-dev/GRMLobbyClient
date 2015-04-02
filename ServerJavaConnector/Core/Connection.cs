@@ -14,6 +14,7 @@ namespace ServerJavaConnector.Core
     {
         private static String serverIP = "91.230.204.135";
         private static String localIP = "127.0.0.1";
+        private static int EST_PORT = 4342;
         private static int MIN_PORT = 4343;
         private static int MAX_PORT = 4350;
         private Socket clientSocket;
@@ -40,27 +41,47 @@ namespace ServerJavaConnector.Core
                 }
                 catch (SocketException ex)
                 {
-                    Console.Out.WriteLine(Port + " not found");
+                    Console.Out.WriteLine(Port + " not found. \n" + ex.Message);
                     Connected = false;
                 }
             }
         }
 
+        public void Disconnect()
+        {
+            if (clientSocket != null)
+            {
+                listener.stopListening();
+                if (clientSocket.Connected == true)
+                {
+                    clientSocket.Shutdown(SocketShutdown.Both);
+                }
+                clientSocket.Close();
+                clientSocket = null;
+            }
+            Connected = false;
+            Thread.Sleep(100);
+        }
+
         public string receivePacket()
         {
             byte[] rcvLenBytes = new byte[4];
-            String rcv="";
+            String rcv = "";
             try
             {
+                clientSocket.ReceiveTimeout = 100;
                 clientSocket.Receive(rcvLenBytes);
                 int rcvLen = System.BitConverter.ToInt32(rcvLenBytes, 0);
                 byte[] rcvBytes = new byte[rcvLen];
                 clientSocket.Receive(rcvBytes);
-                 rcv = System.Text.Encoding.ASCII.GetString(rcvBytes);
+                rcv = System.Text.Encoding.ASCII.GetString(rcvBytes);
             }
             catch (Exception e)
             {
-                Console.Out.WriteLine(e.Message);
+                if (!e.Message.Contains("respond after a period of time"))
+                {
+                    Console.Out.WriteLine("Exception while receiving msg:\n" + e.Message);
+                }
             }
             return rcv;
         }
@@ -85,17 +106,5 @@ namespace ServerJavaConnector.Core
         }
 
         public int Port { get; private set; }
-
-        public void Disconnect()
-        {
-            if (clientSocket != null)
-            {
-                listener.stopListening();
-                clientSocket.Shutdown(SocketShutdown.Both);
-                clientSocket.Close();
-            }
-            Connected = false;
-            Thread.Sleep(100);
-        }
     }
 }
