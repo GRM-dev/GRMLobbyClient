@@ -15,8 +15,6 @@ namespace ServerJavaConnector.Core
         private static String serverIP = "91.230.204.135";
         private static String localIP = "127.0.0.1";
         private static int EST_PORT = 4342;
-        private static int MIN_PORT = 4343;
-        private static int MAX_PORT = 4350;
         private Socket clientSocket;
         private Boolean _connected = false;
         private MessageListener listener;
@@ -25,25 +23,24 @@ namespace ServerJavaConnector.Core
         public Connection()
         {
             listener = new MessageListener(this);
+
         }
 
         public void Connect()
         {
-            for (Port = MIN_PORT; Port < MAX_PORT && !Connected; Port++)
+            int Port = EST_PORT;
+            serverAddress = new IPEndPoint(IPAddress.Parse(localIP), Port);
+            clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            try
             {
-                serverAddress = new IPEndPoint(IPAddress.Parse(localIP), Port);
-                clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                try
-                {
-                    clientSocket.Connect(serverAddress);
-                    Connected = true;
-                    listener.startListening();
-                }
-                catch (SocketException ex)
-                {
-                    Console.Out.WriteLine(Port + " not found. \n" + ex.Message);
-                    Connected = false;
-                }
+                clientSocket.Connect(serverAddress);
+                Connected = true;
+                listener.startListening();
+            }
+            catch (SocketException ex)
+            {
+                Console.Out.WriteLine(Port + " not found. \n" + ex.Message);
+                Connected = false;
             }
         }
 
