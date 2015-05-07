@@ -33,49 +33,15 @@ namespace ServerJavaConnector
             this.Conn = new Connection();
             instance = this;
             InitializeComponent();
-            this.ConsoleOutput = ConsoleBoxV;
-            this.ConsoleInput = ConsoleInputV;
+            this.MPage = new MainPage(this.Conn);
+            setupFrames();
         }
 
-        private void Send_Button_Click(object sender, RoutedEventArgs e)
+        private void setupFrames()
         {
-            if (!Conn.Connected) { return; }
-            try
-            {
-                PacketParser.sendPacket(ConsoleInput.Text,Conn.ClientSocket);
-                ConsoleInput.Text = "";
-            }
-            catch (Exception ex)
-            {
-                Console.Out.WriteLine(ex.ToString());
-                Conn.Connected = false;
-            }
-        }
-
-        private void Close_Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.Hide();
-            Application.Current.Shutdown();
-        }
-
-        private async void Connect_Button_Click(object sender, RoutedEventArgs e)
-        {
-            String name= await DialogManager.ShowInputAsync(this, "Podaj swoje dane", "imie");
-            ConsoleOutput.Text += "Hello " + name + "\n";
-            Conn.Connect();
-            if (Conn.Connected)
-            {
-                ConsoleOutput.Text += "Connected with server on port: " + Conn.Port + "\n";
-            }
-            else
-            {
-                ConsoleOutput.Text += "There were problems while connecting\n";
-            }
-        }
-        
-        private void Disconnect_Button_Click(object sender, RoutedEventArgs e)
-        {
-            Conn.Disconnect();
+            this.MainFrame.Navigate(this.MPage);
+            this.LoginFrame.Navigate(new LoginPage());
+            this.LoginFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
@@ -101,8 +67,8 @@ namespace ServerJavaConnector
             }
         }
 
-        public Connection Conn { get; set; }
-        public TextBox ConsoleInput {get; set; }
-        public TextBlock ConsoleOutput { get; set; }
+        public Connection Conn { get; private set; }
+
+        public MainPage MPage { get; private set; }
     }
 }

@@ -8,18 +8,16 @@ namespace ServerJavaConnector.Core
 {
     public class User
     {
-
+        public User()
+            : this(-1, "NaN", -1, "NaN@NaN.NaN")
+        {
+        }
         public User(int ID, String name, int age, String mail)
         {
             this.ID = ID;
             this.Name = name;
             this.Age = age;
             this.Mail = mail;
-        }
-
-        public User()
-        {
-            // TODO: Complete member initialization
         }
 
         public int ID { get; set; }

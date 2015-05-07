@@ -10,7 +10,7 @@ namespace ServerJavaConnector.Core.Connection
 {
     public static class PacketParser
     {
-        public static string receivePacket(Socket clientSocket)
+        private static string receivePacket(Socket clientSocket)
         {
             byte[] rcvLenBytes = new byte[4];
             String rcv = "";
@@ -33,7 +33,7 @@ namespace ServerJavaConnector.Core.Connection
             return rcv;
         }
 
-        public static void sendPacket(String msg, Socket clientSocket)
+        private static void sendPacket(String msg, Socket clientSocket)
         {
             int msgLen = System.Text.Encoding.ASCII.GetByteCount(msg);
             byte[] msgBytes = System.Text.Encoding.ASCII.GetBytes(msg);
@@ -42,10 +42,29 @@ namespace ServerJavaConnector.Core.Connection
             clientSocket.Send(msgBytes);
         }
 
+        public static void sendMessage(String msg, Socket clientSocket)
+        {
+            if (!msg.StartsWith("!msg "))
+            {
+                msg = "!msg " + msg;
+            }
+            sendPacket(msg, clientSocket);
+        }
+
+        public static string receiveMessage(Socket clientSocket)
+        {
+            String rec = receivePacket(clientSocket);
+            if (rec.StartsWith("!msg ")) //TODO: commands on '!' mark
+            {
+                return rec;
+            }
+            return rec;
+        }
+
         public static void sendUserData(User user, Socket socket)
         {
-            String objS=JsonConvert.SerializeObject(user);
-            Console.WriteLine("send "+objS);
+            String objS = JsonConvert.SerializeObject(user);
+            Console.WriteLine("send " + objS);
             sendPacket(objS, socket);
         }
 
@@ -53,15 +72,19 @@ namespace ServerJavaConnector.Core.Connection
         {
             sendPacket("!userdata " + ID, socket);
             String rec = "";
-            while (!rec.StartsWith("{\"")) {
+            while (!rec.StartsWith("{\""))
+            {
                 rec = receivePacket(socket);
             }
-            try {
-                Console.WriteLine("rec "+rec);
+            try
+            {
+                Console.WriteLine("rec " + rec);
                 User user = JsonConvert.DeserializeObject<User>(rec);
                 Console.WriteLine(user.Name);
                 return user;
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 Console.WriteLine(ex.Message);
                 return null;
             }

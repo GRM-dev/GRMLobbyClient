@@ -19,10 +19,12 @@ namespace ServerJavaConnector.Core.Connection
         private Boolean _connected = false;
         private MessageListener listener;
         private IPEndPoint serverAddress;
+        private User _user;
 
         public Connection()
         {
             listener = new MessageListener(this);
+            UserData = new User();
         }
 
         public void Connect()
@@ -49,6 +51,7 @@ namespace ServerJavaConnector.Core.Connection
             if (_clientSocket != null)
             {
                 listener.stopListening();
+                
                 if (_clientSocket.Connected == true)
                 {
                     _clientSocket.Shutdown(SocketShutdown.Both);
@@ -77,5 +80,11 @@ namespace ServerJavaConnector.Core.Connection
         }
 
         public int Port { get; private set; }
+
+        public User UserData
+        {
+            get { return _user; }
+            private set { _user = value; }
+        }
     }
 }
