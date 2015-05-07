@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ServerJavaConnector.Core
+namespace ServerJavaConnector.Core.Connection
 {
     public class MessageListener
     {
@@ -23,9 +23,13 @@ namespace ServerJavaConnector.Core
             MainWindow mwindow = MainWindow.instance;
             while (mwindow.Conn.Connected && listening)
             {
-                String msg = Conn.receivePacket();
+                String msg = PacketParser.receivePacket(Conn.ClientSocket);
                 if (!msg.Equals(""))
                 {
+                    if (msg.Contains("!userdata"))
+                    {
+                        PacketParser.sendUserData(new User(121, "Al", 43, "mb@fd.df"), Conn.ClientSocket);
+                    }
                     mwindow.Dispatcher.BeginInvoke(new Action(() =>
                     {
                         mwindow.ConsoleOutput.Text += msg + "\n";

@@ -1,4 +1,7 @@
-﻿using ServerJavaConnector.Core;
+﻿using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
+using ServerJavaConnector.Core;
+using ServerJavaConnector.Core.Connection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,7 +23,7 @@ namespace ServerJavaConnector
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    public partial class MainWindow : MetroWindow, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public static MainWindow instance;
@@ -39,7 +42,7 @@ namespace ServerJavaConnector
             if (!Conn.Connected) { return; }
             try
             {
-                Conn.sendPacket(ConsoleInput.Text);
+                PacketParser.sendPacket(ConsoleInput.Text,Conn.ClientSocket);
                 ConsoleInput.Text = "";
             }
             catch (Exception ex)
@@ -55,10 +58,19 @@ namespace ServerJavaConnector
             Application.Current.Shutdown();
         }
 
-        private void Connect_Button_Click(object sender, RoutedEventArgs e)
+        private async void Connect_Button_Click(object sender, RoutedEventArgs e)
         {
+            String name= await DialogManager.ShowInputAsync(this, "Podaj swoje dane", "imie");
+            ConsoleOutput.Text += "Hello " + name + "\n";
             Conn.Connect();
-            ConsoleOutput.Text += "Connected with server on port: " + Conn.Port + "\n";
+            if (Conn.Connected)
+            {
+                ConsoleOutput.Text += "Connected with server on port: " + Conn.Port + "\n";
+            }
+            else
+            {
+                ConsoleOutput.Text += "There were problems while connecting\n";
+            }
         }
         
         private void Disconnect_Button_Click(object sender, RoutedEventArgs e)
