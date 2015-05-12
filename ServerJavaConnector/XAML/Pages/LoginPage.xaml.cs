@@ -10,7 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ServerJavaConnector
+namespace ServerJavaConnector.Pages
 {
 	public partial class LoginPage
 	{
@@ -29,6 +29,11 @@ namespace ServerJavaConnector
 		private void Register_Click(object sender, System.Windows.RoutedEventArgs e)
 		{
 			// TODO: Add event handler implementation here.
+		}
+
+		private void Back_Click(object sender, System.Windows.RoutedEventArgs e)
+		{
+			
 		}
 	}
 }

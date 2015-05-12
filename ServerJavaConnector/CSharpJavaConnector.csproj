@@ -103,6 +103,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="XAML\Pages\PageManager.cs" />
     <Page Include="Properties\DesignTimeResources.xaml" Condition="'$(DesignTime)'=='true' OR ('$(SolutionPath)'!='' AND Exists('$(SolutionPath)') AND '$(BuildingInsideVisualStudio)'!='true' AND '$(BuildingInsideExpressionBlend)'!='true')">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -112,11 +113,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="XAML\LoginPage.xaml">
+    <Page Include="XAML\Pages\LoginPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="XAML\MainPage.xaml">
+    <Page Include="XAML\Pages\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -133,10 +134,10 @@
     <Compile Include="Core\CommandManager.cs" />
     <Compile Include="Core\Connection\Connection.cs" />
     <Compile Include="Core\Connection\MessageListener.cs" />
-    <Compile Include="XAML\LoginPage.xaml.cs">
+    <Compile Include="XAML\Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="XAML\MainPage.xaml.cs">
+    <Compile Include="XAML\Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="XAML\MainWindow.xaml.cs">

@@ -32,7 +32,7 @@ namespace ServerJavaConnector.Core.Connection
                     }
                     MWindow.Dispatcher.BeginInvoke(new Action(() =>
                     {
-                        MWindow.MPage.ConsoleOutput.Text += msg + "\n";
+                        //FIXME: MWindow.MPage.ConsoleOutput.Text += msg + "\n";
                     }));
                 }
                 try

@@ -2,6 +2,8 @@
 using MahApps.Metro.Controls.Dialogs;
 using ServerJavaConnector.Core;
 using ServerJavaConnector.Core.Connection;
+using ServerJavaConnector.Pages;
+using ServerJavaConnector.XAML.Pages;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,15 +35,17 @@ namespace ServerJavaConnector
             this.Conn = new Connection();
             instance = this;
             InitializeComponent();
-            this.MPage = new MainPage(this.Conn);
-            setupFrames();
+            PageManager pM = new PageManager(getFrames());
+            pM.initSetup();
         }
 
-        private void setupFrames()
+        private Dictionary<FrameType, Frame> getFrames()
         {
-            this.MainFrame.Navigate(this.MPage);
-            this.LoginFrame.Navigate(new LoginPage());
-            this.LoginFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
+            Dictionary<FrameType, Frame> frames = new Dictionary<FrameType,Frame>();
+            frames.Add(FrameType.MainFrame, MainFrame);
+            frames.Add(FrameType.TopFrame,TopFrame);
+            frames.Add(FrameType.BottomFrame,BottomFrame);
+            return frames;
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
@@ -68,7 +72,5 @@ namespace ServerJavaConnector
         }
 
         public Connection Conn { get; private set; }
-
-        public MainPage MPage { get; private set; }
     }
 }

@@ -2,9 +2,9 @@
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:System="clr-namespace:System;assembly=mscorlib" 
-	x:Class="ServerJavaConnector.MainPage"
+	x:Class="ServerJavaConnector.Pages.MainPage"
 	x:Name="Page"
-	WindowTitle="Page"
+	WindowTitle="MainPage"
 	FlowDirection="LeftToRight"
 	WindowWidth="640" WindowHeight="480" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" Grid.IsSharedSizeScope="True" UseLayoutRounding="True" ScrollViewer.CanContentScroll="True">
 	<Page.Resources>
