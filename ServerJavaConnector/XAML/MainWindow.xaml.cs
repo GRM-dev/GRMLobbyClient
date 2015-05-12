@@ -39,9 +39,9 @@ namespace ServerJavaConnector
             pM.initSetup();
         }
 
-        private Dictionary<FrameType, Frame> getFrames()
+        private Dictionary<FrameType, CFrame> getFrames()
         {
-            Dictionary<FrameType, Frame> frames = new Dictionary<FrameType,Frame>();
+            Dictionary<FrameType, CFrame> frames = new Dictionary<FrameType,CFrame>();
             frames.Add(FrameType.MainFrame, MainFrame);
             frames.Add(FrameType.TopFrame,TopFrame);
             frames.Add(FrameType.BottomFrame,BottomFrame);

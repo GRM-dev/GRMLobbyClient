@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServerJavaConnector.XAML.Pages;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -33,7 +34,7 @@ namespace ServerJavaConnector.Pages
 
 		private void Back_Click(object sender, System.Windows.RoutedEventArgs e)
 		{
-			
+            PageManager.instance.getFrame(this).goBack();
 		}
 	}
 }

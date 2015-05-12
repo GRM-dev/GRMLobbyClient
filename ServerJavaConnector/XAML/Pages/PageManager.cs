@@ -14,10 +14,10 @@ namespace ServerJavaConnector.XAML.Pages
     /// </summary>
     public class PageManager
     {
-        private Dictionary<FrameType, Frame> _frames;
+        private Dictionary<FrameType, CFrame> _frames;
         private Dictionary<PageType, Page> _pages;
 
-        public PageManager(Dictionary<FrameType, Frame> frames)
+        public PageManager(Dictionary<FrameType, CFrame> frames)
         {
             instance = this;
             this.Frames = frames;
@@ -38,7 +38,7 @@ namespace ServerJavaConnector.XAML.Pages
         /// </summary>
         public void initSetup()
         {
-            getFrame(FrameType.MainFrame).Navigate(getPage(PageType.MainPage));
+            getFrame(FrameType.MainFrame).AddAndChangePage(getPage(PageType.MainPage));
         }
 
         /// <summary>
@@ -49,16 +49,16 @@ namespace ServerJavaConnector.XAML.Pages
         /// <returns>True if successfully changed. False when page is opened in different frame.</returns>
         public bool changePage(FrameType fT, PageType pT)
         {
-            Frame frame=getFrame(fT);
+            CFrame frame=getFrame(fT);
             Page page=getPage(pT);
-            foreach (KeyValuePair<FrameType, Frame> entry in Frames)
+            foreach (KeyValuePair<FrameType, CFrame> entry in Frames)
             {
                 if (entry.Value.Content == page)
                 {
                     return false;
                 }
             }
-            frame.Navigate(page);
+            frame.AddAndChangePage(page);
             return true;
         }
 
@@ -68,16 +68,28 @@ namespace ServerJavaConnector.XAML.Pages
             return page;
         }
 
-        private Frame getFrame(FrameType fT)
+        private CFrame getFrame(FrameType fT)
         {
-            Frame frame;
+            CFrame frame;
             Frames.TryGetValue(fT, out frame);
             return frame;
         }
 
+        public CFrame getFrame(Page page)
+        {
+            foreach (KeyValuePair<FrameType, CFrame> entry in Frames)
+            {
+                if (entry.Value.CurrentPage == page)
+                {
+                    return entry.Value;
+                }
+            }
+            return null;
+        }
+
         public static PageManager instance { get; private set; }
 
-        public Dictionary<FrameType, Frame> Frames
+        public Dictionary<FrameType, CFrame> Frames
         {
             get { return _frames; }
             private set { _frames = value; }

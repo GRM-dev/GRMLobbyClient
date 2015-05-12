@@ -49,9 +49,9 @@ namespace ServerJavaConnector.Pages
 
         private void Connect_Button_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mWindow=(MainWindow)Application.Current.MainWindow;
+            /*MainWindow mWindow=(MainWindow)Application.Current.MainWindow;
             var flyout = mWindow.Flyouts.Items[1] as Flyout;
-            flyout.IsOpen = true;
+            flyout.IsOpen = true;*/
             PageManager.instance.changePage(FrameType.MainFrame, PageType.LoginPage);
             
             /*String name = await DialogManager.ShowInputAsync((MainWindow)Application.Current.MainWindow, "Give your personal data", "Name");

@@ -4,17 +4,18 @@
         xmlns:System="clr-namespace:System;assembly=mscorlib" 
         xmlns:Core="clr-namespace:ServerJavaConnector.Core" 
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:Pages="clr-namespace:ServerJavaConnector.XAML.Pages"
         x:Class="ServerJavaConnector.MainWindow"
         Title="Java Chat Client" Height="600" Width="800" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" ScrollViewer.VerticalScrollBarVisibility="Auto" RightWindowCommandsOverlayBehavior="Flyouts" SaveWindowPosition="True" EnableDWMDropShadow="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" WindowStyle="ThreeDBorderWindow">
-	<Controls:MetroWindow.Flyouts>
-		<Controls:FlyoutsControl x:Name="FlyoutController">
-			<Controls:Flyout Header="" Position="Bottom">
-					<Frame x:Name="BottomFrame" MinHeight="50" NavigationUIVisibility="Hidden" />
-			</Controls:Flyout>
-			<Controls:Flyout Header="" Position="Top">
-				<Frame x:Name="TopFrame" MinHeight="50" NavigationUIVisibility="Hidden"/>
-			</Controls:Flyout>
-		</Controls:FlyoutsControl>
-	</Controls:MetroWindow.Flyouts>
-    <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl x:Name="FlyoutController">
+            <Controls:Flyout Header="" Position="Bottom">
+                <Pages:CFrame x:Name="BottomFrame" MinHeight="50"/>
+            </Controls:Flyout>
+            <Controls:Flyout Header="" Position="Top">
+                <Pages:CFrame x:Name="TopFrame" MinHeight="50" />
+            </Controls:Flyout>
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
+    <Pages:CFrame x:Name="MainFrame" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 </Controls:MetroWindow>
