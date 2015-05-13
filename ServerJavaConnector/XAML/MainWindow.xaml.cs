@@ -3,6 +3,7 @@ using MahApps.Metro.Controls.Dialogs;
 using ServerJavaConnector.Core;
 using ServerJavaConnector.Core.Connection;
 using ServerJavaConnector.Pages;
+using ServerJavaConnector.XAML.Dialogs;
 using ServerJavaConnector.XAML.Pages;
 using System;
 using System.Collections.Generic;
@@ -47,9 +48,19 @@ namespace ServerJavaConnector
             return frames;
         }
 
-        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        public static void CloseApp()
         {
-            Conn.Disconnect();
+            if (instance != null)
+            {
+                instance.Conn.Disconnect();
+                Application.Current.Shutdown();
+            }
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            e.Cancel = true;
+            CDialogManager.ShowClosingDialog();
         }
 
         public Connection Conn { get; private set; }

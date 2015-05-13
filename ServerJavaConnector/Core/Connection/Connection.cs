@@ -1,4 +1,5 @@
 ﻿using ServerJavaConnector.Pages;
+using ServerJavaConnector.XAML.Dialogs;
 using ServerJavaConnector.XAML.Pages;
 using System;
 using System.Collections.Generic;
@@ -43,7 +44,7 @@ namespace ServerJavaConnector.Core.Connection
             }
             catch (SocketException ex)
             {
-                Console.Out.WriteLine(Port + " not found. \n" + ex.Message);
+                CDialogManager.ShowExceptionDialog(ex, Port + " not found.");
                 Connected = false;
             }
         }

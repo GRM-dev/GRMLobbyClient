@@ -1,6 +1,7 @@
 ﻿using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using ServerJavaConnector.Core.Connection;
+using ServerJavaConnector.XAML.Dialogs;
 using ServerJavaConnector.XAML.Pages;
 using System;
 using System.Collections.Generic;
@@ -41,15 +42,14 @@ namespace ServerJavaConnector.Pages
             }
             catch (Exception ex)
             {
-                Console.Out.WriteLine(ex.ToString());
+                CDialogManager.ShowExceptionDialog(ex, "While sending");
                 Conn.Disconnect();
             }
         }
 
         private void Close_Button_Click(object sender, RoutedEventArgs e)
         {
-            Conn.Disconnect();
-            Application.Current.Shutdown();
+            CDialogManager.ShowClosingDialog();
         }
 
         private void Connect_Button_Click(object sender, RoutedEventArgs e)

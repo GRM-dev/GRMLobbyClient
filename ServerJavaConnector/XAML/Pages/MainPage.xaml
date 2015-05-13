@@ -6,21 +6,33 @@
 	x:Name="Page"
 	WindowTitle="MainPage"
 	FlowDirection="LeftToRight"
-	WindowWidth="640" WindowHeight="480" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" Grid.IsSharedSizeScope="True" UseLayoutRounding="True" ScrollViewer.CanContentScroll="True">
+    UseLayoutRounding="True" ScrollViewer.CanContentScroll="True" ShowsNavigationUI="False">
 	<Page.Resources>
         <System:Boolean x:Key="Connected">False</System:Boolean>
         <System:Boolean x:Key="NegConnected">True</System:Boolean>
     </Page.Resources>
-	<Grid Background="#FF118927">
-        <Button x:Name="Send_Button" Content="Send" HorizontalAlignment="Left" Margin="421,264,0,0" VerticalAlignment="Top" Width="73" Click="Send_Button_Click" FontWeight="Bold" BorderBrush="#FF0017FF" Foreground="White" Height="36" Background="{DynamicResource RedStyleButtonBrush}" IsEnabled="{DynamicResource Connected}" IsDefault="True"/>
-        <TextBox x:Name="ConsoleInputV" HorizontalAlignment="Left" Height="31" Margin="223,269,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="198" Foreground="#FF5DFF00" Background="Black">
+	<Page.Background>
+		<LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+			<GradientStop Color="#FF165D29" Offset="0.25"/>
+			<GradientStop Color="#FF349C51" Offset="1"/>
+		</LinearGradientBrush>
+	</Page.Background>
+	<DockPanel LastChildFill="False" HorizontalAlignment="Center" VerticalAlignment="Center">
+		<StackPanel DockPanel.Dock="Left" Margin="0,10,0,0">
+			<Button x:Name="Connect_Button" Content="Connect" HorizontalAlignment="Left" Height="29" VerticalAlignment="Top" Width="94" Click="Connect_Button_Click" Background="{DynamicResource RedStyleButtonBrush}" Foreground="White" IsEnabled="{DynamicResource NegConnected}"/>
+			<Button x:Name="Disconnect_Button" Content="Disconnect" HorizontalAlignment="Left" Height="29"  VerticalAlignment="Top" Width="94" Click="Disconnect_Button_Click" Background="{DynamicResource RedStyleButtonBrush}" Foreground="White" IsEnabled="{DynamicResource Connected}"/>
+			<Button x:Name="Close_Button" Content="Close" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="94" Click="Close_Button_Click" Height="31" Background="{DynamicResource RedStyleButtonBrush}" Foreground="White" Margin="0,50,0,0"/>
+	    </StackPanel>
+		<StackPanel Margin="15,10,0,0">
+		    <TextBlock x:Name="ConsoleBoxV" HorizontalAlignment="Left" Height="241"  TextWrapping="Wrap" VerticalAlignment="Top" Width="271" Background="Black" Foreground="#FF5DFF00"/>
+       <StackPanel Orientation="Horizontal" Margin="0,3,0,0">
+			<TextBox x:Name="ConsoleInputV" HorizontalAlignment="Left" Height="31" TextWrapping="Wrap" VerticalAlignment="Top" Width="198" Foreground="#FF5DFF00" Background="Black" Margin="0,3,0,0" IsEnabled="{DynamicResource Connected}" >
             <TextBox.InputBindings>
                 <KeyBinding Command="{Binding Send_Button_Click}" Key="Enter" />
             </TextBox.InputBindings>
         </TextBox>
-        <TextBlock x:Name="ConsoleBoxV" HorizontalAlignment="Left" Height="241" Margin="223,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="271" Background="Black" Foreground="#FF5DFF00"/>
-        <Button x:Name="Close_Button" Content="Close" HorizontalAlignment="Left" Margin="42,269,0,0" VerticalAlignment="Top" Width="94" Click="Close_Button_Click" Height="31" Background="{DynamicResource RedStyleButtonBrush}" Foreground="White"/>
-        <Button x:Name="Connect_Button" Content="Connect" HorizontalAlignment="Left" Height="29" Margin="42,59,0,0" VerticalAlignment="Top" Width="94" Click="Connect_Button_Click" Background="{DynamicResource RedStyleButtonBrush}" Foreground="White" IsEnabled="{DynamicResource NegConnected}"/>
-        <Button x:Name="Disconnect_Button" Content="Disconnect" HorizontalAlignment="Left" Height="29" Margin="42,93,0,0" VerticalAlignment="Top" Width="94" Click="Disconnect_Button_Click" Background="{DynamicResource RedStyleButtonBrush}" Foreground="White" IsEnabled="{DynamicResource Connected}"/>
-    </Grid>
+		<Button x:Name="Send_Button" Content="Send" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="73" Click="Send_Button_Click" FontWeight="Bold" BorderBrush="#FF0017FF" Foreground="White" Height="36" Background="{DynamicResource RedStyleButtonBrush}" IsEnabled="{DynamicResource Connected}" IsDefault="True"/>
+		</StackPanel>
+		</StackPanel>
+	</DockPanel>
 </Page>

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ServerJavaConnector.Pages;
+using ServerJavaConnector.XAML.Dialogs;
+using ServerJavaConnector.XAML.Pages;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -32,16 +35,16 @@ namespace ServerJavaConnector.Core.Connection
                     }
                     MWindow.Dispatcher.BeginInvoke(new Action(() =>
                     {
-                        //FIXME: MWindow.MPage.ConsoleOutput.Text += msg + "\n";
+                        ((MainPage)PageManager.instance.getPage(PageType.MainPage)).ConsoleOutput.Text += msg + "\n";
                     }));
                 }
                 try
                 {
                     Thread.Sleep(1000);
                 }
-                catch (ThreadInterruptedException e)
+                catch (ThreadInterruptedException ex)
                 {
-                    Console.Out.WriteLine(e.Message);
+                    CDialogManager.ShowExceptionDialog(ex, null);
                 }
             }
         }
