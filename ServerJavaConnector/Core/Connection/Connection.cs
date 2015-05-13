@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ServerJavaConnector.Pages;
+using ServerJavaConnector.XAML.Pages;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -69,7 +71,7 @@ namespace ServerJavaConnector.Core.Connection
             set
             {
                 _connected = value;
-                MainWindow.OnPropertySChanged("Connected");
+                MainPage.OnPropertySChanged("Connected");
             }
         }
 

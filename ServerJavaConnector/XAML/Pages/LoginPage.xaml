@@ -50,11 +50,11 @@
         <StackPanel Margin="0,10,0,0" >
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
 				<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" FontSize="26.667" FontWeight="Bold"/>
-				<TextBox HorizontalAlignment="Right" Height="50" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" FontSize="26.667" Margin="10,0,0,0"/>
+				<TextBox x:Name="InputUsernameBox" HorizontalAlignment="Right" Height="50" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" FontSize="26.667" Margin="10,0,0,0"/>
 			</StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
 				<TextBlock TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" FontSize="26.667" HorizontalAlignment="Left" UseLayoutRounding="True" FontWeight="Bold"/>
-				<PasswordBox HorizontalAlignment="Right" VerticalAlignment="Top" Height="50" Width="200" FontSize="26.667" Margin="10,0,0,0"/>
+				<PasswordBox x:Name="InputPasswordBox" HorizontalAlignment="Right" VerticalAlignment="Top" Height="50" Width="200" FontSize="26.667" Margin="10,0,0,0"/>
 			</StackPanel>
         </StackPanel>
     </DockPanel>

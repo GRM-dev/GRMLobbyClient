@@ -62,13 +62,13 @@ namespace ServerJavaConnector.XAML.Pages
             return true;
         }
 
-        private Page getPage(PageType pT){
+        public Page getPage(PageType pT){
             Page page;
             Pages.TryGetValue(pT, out page);
             return page;
         }
 
-        private CFrame getFrame(FrameType fT)
+        public CFrame getFrame(FrameType fT)
         {
             CFrame frame;
             Frames.TryGetValue(fT, out frame);

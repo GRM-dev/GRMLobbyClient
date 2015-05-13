@@ -25,9 +25,8 @@ namespace ServerJavaConnector
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : MetroWindow, INotifyPropertyChanged
+    public partial class MainWindow : MetroWindow
     {
-        public event PropertyChangedEventHandler PropertyChanged;
         public static MainWindow instance;
 
         public MainWindow()
@@ -41,34 +40,16 @@ namespace ServerJavaConnector
 
         private Dictionary<FrameType, CFrame> getFrames()
         {
-            Dictionary<FrameType, CFrame> frames = new Dictionary<FrameType,CFrame>();
+            Dictionary<FrameType, CFrame> frames = new Dictionary<FrameType, CFrame>();
             frames.Add(FrameType.MainFrame, MainFrame);
-            frames.Add(FrameType.TopFrame,TopFrame);
-            frames.Add(FrameType.BottomFrame,BottomFrame);
+            frames.Add(FrameType.TopFrame, TopFrame);
+            frames.Add(FrameType.BottomFrame, BottomFrame);
             return frames;
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
             Conn.Disconnect();
-        }
-
-        protected void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-            Resources["Connected"] = Conn.Connected;
-            Resources["NegConnected"] = !Conn.Connected;
-        }
-
-        internal static void OnPropertySChanged(string p)
-        {
-            if (instance != null)
-            {
-                instance.OnPropertyChanged(p);
-            }
         }
 
         public Connection Conn { get; private set; }
