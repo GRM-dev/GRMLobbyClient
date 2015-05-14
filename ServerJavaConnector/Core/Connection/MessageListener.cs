@@ -1,5 +1,5 @@
 ﻿using ServerJavaConnector.Core.Commands;
-using ServerJavaConnector.Pages;
+using ServerJavaConnector.XAML;
 using ServerJavaConnector.XAML.Dialogs;
 using ServerJavaConnector.XAML.Pages;
 using System;

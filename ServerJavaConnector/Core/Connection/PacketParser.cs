@@ -50,34 +50,5 @@ namespace ServerJavaConnector.Core.Connection
                 stream.Write(outB, 0, outB.Length);
             }
         }
-
-        public static void sendUserData(User user, Socket socket)
-        {
-            String objS = JsonConvert.SerializeObject(user);
-            Console.WriteLine("send " + objS);
-            sendPacket(objS, socket);
-        }
-
-        public static User receiveUserData(int ID, Socket socket)
-        {
-            sendPacket("!userdata " + ID, socket);
-            String rec = "";
-            while (!rec.StartsWith("{\""))
-            {
-                rec = receivePacket(socket);
-            }
-            try
-            {
-                Console.WriteLine("rec " + rec);
-                User user = JsonConvert.DeserializeObject<User>(rec);
-                Console.WriteLine(user.Name);
-                return user;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return null;
-            }
-        }
     }
 }

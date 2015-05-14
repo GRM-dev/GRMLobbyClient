@@ -3,7 +3,7 @@ using MahApps.Metro.Controls.Dialogs;
 using ServerJavaConnector.Core;
 using ServerJavaConnector.Core.Commands;
 using ServerJavaConnector.Core.Connection;
-using ServerJavaConnector.Pages;
+using ServerJavaConnector.XAML;
 using ServerJavaConnector.XAML.Dialogs;
 using ServerJavaConnector.XAML.Pages;
 using System;

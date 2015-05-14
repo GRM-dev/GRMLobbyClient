@@ -105,6 +105,7 @@
     </ApplicationDefinition>
     <Compile Include="Core\Commands\Commands.cs" />
     <Compile Include="Core\Commands\CommandType.cs" />
+    <Compile Include="Core\JSON\JsonParser.cs" />
     <Compile Include="XAML\Dialogs\CDialogManager.cs" />
     <Compile Include="XAML\Pages\CFrame.xaml.cs">
       <DependentUpon>CFrame.xaml</DependentUpon>
