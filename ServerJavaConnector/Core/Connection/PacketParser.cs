@@ -4,61 +4,51 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ServerJavaConnector.Core.Connection
 {
     public static class PacketParser
     {
-        private static string receivePacket(Socket clientSocket)
+        public static string receivePacket(Socket clientSocket)
         {
-            byte[] rcvLenBytes = new byte[4];
-            String rcv = "";
-            try
+            NetworkStream stream = new NetworkStream(clientSocket);
+            StringBuilder str = new StringBuilder();
+            while (true)
             {
-                clientSocket.ReceiveTimeout = 100;
-                clientSocket.Receive(rcvLenBytes);
-                int rcvLen = System.BitConverter.ToInt32(rcvLenBytes, 0);
-                byte[] rcvBytes = new byte[rcvLen];
-                clientSocket.Receive(rcvBytes);
-                rcv = System.Text.Encoding.ASCII.GetString(rcvBytes);
-            }
-            catch (Exception e)
-            {
-                if (!e.Message.Contains("respond after a period of time"))
+                if (stream.DataAvailable)
                 {
-                    Console.Out.WriteLine("Exception while receiving msg:\n" + e.Message);
+                    int b = stream.ReadByte();
+                    if (b > 0)
+                    {
+                        str.Append((char)b);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                else if (str.ToString().Length > 0)
+                {
+                    break;
                 }
             }
-            return rcv;
+            return str.ToString();
         }
 
-        private static void sendPacket(String msg, Socket clientSocket)
+        public static void sendPacket(string msg, Socket clientSocket)
         {
-            int msgLen = System.Text.Encoding.ASCII.GetByteCount(msg);
-            byte[] msgBytes = System.Text.Encoding.ASCII.GetBytes(msg);
-            byte[] msgLenBytes = System.BitConverter.GetBytes(msgLen);
-            clientSocket.Send(msgLenBytes);
-            clientSocket.Send(msgBytes);
-        }
-
-        public static void sendMessage(String msg, Socket clientSocket)
-        {
-            if (!msg.StartsWith("!msg "))
+            if (msg.Length > 0)
             {
-                msg = "!msg " + msg;
+                NetworkStream stream = new NetworkStream(clientSocket);
+                byte[] outBMsg = Encoding.UTF8.GetBytes(msg);
+                byte[] outB = new byte[outBMsg.Length + 4];
+                byte[] outLenB = System.BitConverter.GetBytes(msg.Length + 4);
+                outLenB.CopyTo(outB, 0);
+                outBMsg.CopyTo(outB, 4);
+                stream.Write(outB, 0, outB.Length);
             }
-            sendPacket(msg, clientSocket);
-        }
-
-        public static string receiveMessage(Socket clientSocket)
-        {
-            String rec = receivePacket(clientSocket);
-            if (rec.StartsWith("!msg ")) //TODO: commands on '!' mark
-            {
-                return rec;
-            }
-            return rec;
         }
 
         public static void sendUserData(User user, Socket socket)

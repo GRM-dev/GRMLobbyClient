@@ -37,8 +37,15 @@ namespace ServerJavaConnector.Pages
             if (!Conn.Connected) { return; }
             try
             {
-                PacketParser.sendMessage(ConsoleInput.Text, Conn.ClientSocket);
-                ConsoleInput.Text = "";
+                String input = ConsoleInput.Text;
+                if (!input.StartsWith("!"))
+                {
+                    input = "!say " + input;
+                }
+                    if (MainWindow.instance.CommandManager.executeCommand(input, Conn))
+                    {
+                        ConsoleInput.Text = "";
+                    }
             }
             catch (Exception ex)
             {

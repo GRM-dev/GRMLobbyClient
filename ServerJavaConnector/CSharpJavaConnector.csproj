@@ -103,6 +103,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Core\Commands\Commands.cs" />
+    <Compile Include="Core\Commands\CommandType.cs" />
     <Compile Include="XAML\Dialogs\DialogManager.cs" />
     <Compile Include="XAML\Pages\CFrame.xaml.cs">
       <DependentUpon>CFrame.xaml</DependentUpon>
@@ -139,7 +141,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Core\CommandManager.cs" />
+    <Compile Include="Core\Commands\CommandManager.cs" />
     <Compile Include="Core\Connection\Connection.cs" />
     <Compile Include="Core\Connection\MessageListener.cs" />
     <Compile Include="XAML\Pages\LoginPage.xaml.cs">

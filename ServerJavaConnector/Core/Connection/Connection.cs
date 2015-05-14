@@ -20,13 +20,13 @@ namespace ServerJavaConnector.Core.Connection
         private static int EST_PORT = 4342;
         private Socket _clientSocket;
         private Boolean _connected = false;
-        private MessageListener listener;
+        private WebMessageListener listener;
         private IPEndPoint serverAddress;
         private User _user;
 
         public Connection()
         {
-            listener = new MessageListener(this);
+            listener = new WebMessageListener(this);
             UserData = new User();
         }
 

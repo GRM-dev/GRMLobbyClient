@@ -1,6 +1,7 @@
 ﻿using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using ServerJavaConnector.Core;
+using ServerJavaConnector.Core.Commands;
 using ServerJavaConnector.Core.Connection;
 using ServerJavaConnector.Pages;
 using ServerJavaConnector.XAML.Dialogs;
@@ -15,7 +16,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -29,6 +29,7 @@ namespace ServerJavaConnector
     public partial class MainWindow : MetroWindow
     {
         public static MainWindow instance;
+        private CommandManager _CM;
 
         public MainWindow()
         {
@@ -37,6 +38,7 @@ namespace ServerJavaConnector
             InitializeComponent();
             PageManager pM = new PageManager(getFrames());
             pM.initSetup();
+            CommandManager = new CommandManager(this);
         }
 
         private Dictionary<FrameType, CFrame> getFrames()
@@ -64,5 +66,11 @@ namespace ServerJavaConnector
         }
 
         public Connection Conn { get; private set; }
+
+        public CommandManager CommandManager
+        {
+            get { return _CM; }
+            private set { _CM = value; }
+        }
     }
 }

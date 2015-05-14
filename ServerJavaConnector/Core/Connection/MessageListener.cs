@@ -1,4 +1,5 @@
-﻿using ServerJavaConnector.Pages;
+﻿using ServerJavaConnector.Core.Commands;
+using ServerJavaConnector.Pages;
 using ServerJavaConnector.XAML.Dialogs;
 using ServerJavaConnector.XAML.Pages;
 using System;
@@ -11,12 +12,12 @@ using System.Threading.Tasks;
 
 namespace ServerJavaConnector.Core.Connection
 {
-    public class MessageListener
+    public class WebMessageListener
     {
         private Thread listenerThread;
         private Boolean listening;
 
-        public MessageListener(Connection conn)
+        public WebMessageListener(Connection conn)
         {
             this.Conn = conn;
         }
@@ -26,17 +27,17 @@ namespace ServerJavaConnector.Core.Connection
             MainWindow MWindow = MainWindow.instance;
             while (MWindow.Conn.Connected && listening)
             {
-                String msg = PacketParser.receiveMessage(Conn.ClientSocket);
+                String msg = PacketParser.receivePacket(Conn.ClientSocket);
                 if (!msg.Equals(""))
                 {
-                    if (msg.Contains("!userdata"))
+                    if (MWindow.CommandManager.executeCommand(msg, Conn))
                     {
-                        PacketParser.sendUserData(Conn.UserData, Conn.ClientSocket);
+                        Console.WriteLine("Command executed");
                     }
-                    MWindow.Dispatcher.BeginInvoke(new Action(() =>
+                    else
                     {
-                        ((MainPage)PageManager.instance.getPage(PageType.MainPage)).ConsoleOutput.Text += msg + "\n";
-                    }));
+                        Console.WriteLine("Command not executed");
+                    }
                 }
                 try
                 {
