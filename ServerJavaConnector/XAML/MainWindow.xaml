@@ -10,10 +10,10 @@
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl x:Name="FlyoutController">
             <Controls:Flyout Header="" Position="Bottom">
-                <Pages:CFrame x:Name="BottomFrame" MinHeight="50"/>
+                <Pages:CFrame x:Name="BottomFrame" MinHeight="50" ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
             </Controls:Flyout>
             <Controls:Flyout Header="" Position="Top">
-                <Pages:CFrame x:Name="TopFrame" MinHeight="50" />
+                <Pages:CFrame x:Name="TopFrame" MinHeight="50" ScrollViewer.HorizontalScrollBarVisibility="Auto" />
             </Controls:Flyout>
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>

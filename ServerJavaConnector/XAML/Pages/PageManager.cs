@@ -30,6 +30,7 @@ namespace ServerJavaConnector.XAML.Pages
             pages.Add(PageType.MainPage, new MainPage());
             pages.Add(PageType.LoginPage, new LoginPage());
             //TODO: pages.Add(PageType.RegisterPage, new RegisterPage()); 
+            pages.Add(PageType.InfoPage, new InfoPage());
             return pages;
         }
 
@@ -104,7 +105,7 @@ namespace ServerJavaConnector.XAML.Pages
 
     public enum PageType
     {
-        MainPage, LoginPage, RegisterPage
+        MainPage, LoginPage, RegisterPage, InfoPage
     }
 
     public enum FrameType

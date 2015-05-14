@@ -1,0 +1,16 @@
+﻿<Page x:Class="ServerJavaConnector.XAML.Pages.InfoPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+	Title="InfoPage" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+	<DockPanel>
+		<StackPanel DockPanel.Dock="Top" HorizontalAlignment="Center">
+			<Label x:Name="TitleLabel" FontSize="32" FontWeight="Bold" Foreground="White" MinHeight="30"/>
+		</StackPanel>
+		<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+			<TextBlock x:Name="MsgBox" HorizontalAlignment="Left"  TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14.667"/>
+		</StackPanel>
+	</DockPanel>
+</Page>

@@ -105,9 +105,12 @@
     </ApplicationDefinition>
     <Compile Include="Core\Commands\Commands.cs" />
     <Compile Include="Core\Commands\CommandType.cs" />
-    <Compile Include="XAML\Dialogs\DialogManager.cs" />
+    <Compile Include="XAML\Dialogs\CDialogManager.cs" />
     <Compile Include="XAML\Pages\CFrame.xaml.cs">
       <DependentUpon>CFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="XAML\Pages\InfoPage.xaml.cs">
+      <DependentUpon>InfoPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="XAML\Pages\PageManager.cs" />
     <Page Include="Properties\DesignTimeResources.xaml" Condition="'$(DesignTime)'=='true' OR ('$(SolutionPath)'!='' AND Exists('$(SolutionPath)') AND '$(BuildingInsideVisualStudio)'!='true' AND '$(BuildingInsideExpressionBlend)'!='true')">
@@ -120,6 +123,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="XAML\Pages\CFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="XAML\Pages\InfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

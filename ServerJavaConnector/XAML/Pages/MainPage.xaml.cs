@@ -61,7 +61,8 @@ namespace ServerJavaConnector.Pages
 
         private void Connect_Button_Click(object sender, RoutedEventArgs e)
         {
-            PageManager.instance.changePage(FrameType.MainFrame, PageType.LoginPage);
+            CDialogManager.ShowInfoBottom("aaaaa", "Laaaaaaaaa\n\n\nagag");
+                //PageManager.instance.changePage(FrameType.MainFrame, PageType.LoginPage);
         }
 
         private void Disconnect_Button_Click(object sender, RoutedEventArgs e)
