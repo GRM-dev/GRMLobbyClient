@@ -13,7 +13,7 @@ namespace ServerJavaConnector.Core.JSON
     {
         public static void sendUserData(User user, Socket socket)
         {
-            String objS = JsonConvert.SerializeObject(user);
+            String objS = "{\"name\":\"User\",\"object\":"+JsonConvert.SerializeObject(user)+"}";
             Console.WriteLine("send " + objS);
             PacketParser.sendPacket(objS, socket);
         }
