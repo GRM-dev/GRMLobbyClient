@@ -23,43 +23,37 @@ namespace ServerJavaConnector.Core.Commands
             Commands.Init();
         }
 
-        public Boolean executeCommand(String command, Connection.Connection conn = null)
+        public Boolean executeCommand(String command, Connection.Connection conn = null, bool invokedByServer = false)
         {
             Console.WriteLine("......|executing|.........");
             Commands comm = Commands.getCommand(command);
             String args = Commands.getOffset(command);
-            return executeCommand(comm, args, conn);
+            return executeCommand(comm, args, conn, false);
         }
 
-        public Boolean executeCommand(Commands comm, String args = null, Connection.Connection conn = null)
+        public Boolean executeCommand(Commands comm, String args = null, Connection.Connection conn = null, bool invokedByServer = false)
         {
-            if (comm == Commands.NONE)
+            switch (comm.Comm)
             {
-                return false;
+                case Command.NONE:
+                    return false;
+                case Command.ERROR:
+                    return false;
+                case Command.MSG:
+                    MainWindow.instance.Dispatcher.BeginInvoke(new Action(() =>
+        {
+            ((MainPage)PageManager.instance.getPage(PageType.MainPage)).WriteLine(args);
+        }));
+                    return true;
+                case Command.SAY:
+                    PacketParser.sendPacket(Commands.SAY.getCommandString() + args, conn.ClientSocket);
+                    return true;
+                case Command.GETUSERDATA:
+                    JsonParser.sendUserData(conn.UserData, conn.ClientSocket);
+                    return true;
+                default:
+                    return false;
             }
-            if (comm == Commands.ERROR)
-            {
-                return false;
-            }
-            if (comm == Commands.MSG)
-            {
-                MainWindow.instance.Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    ((MainPage)PageManager.instance.getPage(PageType.MainPage)).WriteLine(args);
-                }));
-                return true;
-            }
-            if (comm == Commands.SAY)
-            {
-                PacketParser.sendPacket(Commands.SAY.getCommandString() + args, conn.ClientSocket);
-                return true;
-            }
-            if (comm == Commands.USERDATA)
-            {
-                JsonParser.sendUserData(conn.UserData, conn.ClientSocket);
-                return true;
-            }
-            return false;
         }
 
         public void AddCommandToList(String input)

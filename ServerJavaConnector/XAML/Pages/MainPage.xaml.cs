@@ -41,17 +41,40 @@ namespace ServerJavaConnector.XAML.Pages
                 String input = ConsoleInput.Text;
                 if (!input.StartsWith("!"))
                 {
+                    WriteLine(input);
                     input = "!say " + input;
-                }
-                if (MainWindow.instance.CommandManager.executeCommand(input, Conn))
-                {
-                    ConsoleInput.Text = "";
-                    MainWindow.instance.CommandManager.AddCommandToList(input.Substring(5,input.Length-5));
-                    WriteLine("Command executed");
                 }
                 else
                 {
-                    WriteLine("Command not executed!");
+                    WriteLine(input);
+                }
+                var CM = MainWindow.instance.CommandManager;
+                if (CM.executeCommand(input, Conn))
+                {
+                    ConsoleInput.Text = "";
+                    Commands cmd = Commands.getCommand(input);
+                    if (cmd != Commands.NONE && cmd != Commands.ERROR)
+                    {
+                        int len;
+                        if (cmd != Commands.SAY)
+                        {
+                            len = 0;
+                        }
+                        else
+                        {
+                            len = cmd.getCommandString().Length;
+                        }
+                        CM.AddCommandToList(input.Substring(len, input.Length - len));
+                        WriteLine("Command executed");
+                    }
+                    else
+                    {
+                        WriteLine("Command executed but there was something wrong", Brushes.Yellow);
+                    }
+                }
+                else
+                {
+                    WriteLine("Command not executed!", Brushes.Red);
                 }
             }
             catch (Exception ex)
@@ -81,7 +104,6 @@ namespace ServerJavaConnector.XAML.Pages
             ServerJavaConnector.Core.Commands.CommandManager commandManager = MainWindow.instance.CommandManager;
             if (e.Key == Key.Up)
             {
-                Console.WriteLine("Up");
                 String input = ConsoleInput.Text;
                 if (input == null || input == ""
                         || !commandManager.wasExecuted(input))
@@ -99,20 +121,30 @@ namespace ServerJavaConnector.XAML.Pages
             }
             else if (e.Key == Key.Down)
             {
-                Console.WriteLine("Down");
                 String input = ConsoleInput.Text;
                 String nextCommand = commandManager.getNextCommand(input);
                 if (nextCommand != ""
                         || input.Equals(commandManager.getLastCommand()))
                 {
-                    ConsoleInput.Text=nextCommand;
+                    ConsoleInput.Text = nextCommand;
                 }
             }
         }
 
         public void WriteLine(String msg)
         {
-            ConsoleOutput.Text += msg + "\n";
+            WriteLine(msg, Brushes.LightGreen);
+        }
+        public void WriteLine(String msg, Brush color)
+        {
+            if (color == null)
+            {
+                color = new SolidColorBrush(Colors.LightGreen);
+            }
+            TextRange tr = new TextRange(ConsoleBoxV.Document.ContentEnd, ConsoleBoxV.Document.ContentEnd);
+            tr.Text = msg;
+            tr.ApplyPropertyValue(TextElement.ForegroundProperty, color);
+            ConsoleBoxV.AppendText("\n");
         }
 
         protected void OnPropertyChanged(string propertyName)
@@ -135,6 +167,6 @@ namespace ServerJavaConnector.XAML.Pages
 
         public Connection Conn { get; private set; }
         public TextBox ConsoleInput { get; private set; }
-        public TextBlock ConsoleOutput { get; private set; }
+        public RichTextBox ConsoleOutput { get; private set; }
     }
 }

@@ -24,9 +24,9 @@
 			<Button x:Name="Close_Button" Content="Close" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="94" Click="Close_Button_Click" Height="31" Background="{DynamicResource RedStyleButtonBrush}" Foreground="White" Margin="0,50,0,0"/>
 	    </StackPanel>
 		<StackPanel Margin="15,10,0,0">
-       <TextBlock x:Name="ConsoleBoxV" HorizontalAlignment="Left" Height="241"  TextWrapping="Wrap" VerticalAlignment="Top" Width="271" Background="Black" Foreground="#FF5DFF00"/>
+       <RichTextBox x:Name="ConsoleBoxV" HorizontalAlignment="Left" Height="241"   VerticalAlignment="Top" Width="271" Background="Black" Foreground="#FF5DFF00" IsReadOnly="True" SelectionBrush="#FF9E9E9E" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto" UseLayoutRounding="True"/>
        <StackPanel Orientation="Horizontal" Margin="0,3,0,0">
-			<TextBox x:Name="ConsoleInputV" HorizontalAlignment="Left" Height="31" TextWrapping="Wrap" VerticalAlignment="Top" Width="198" Foreground="#FF5DFF00" Background="Black" Margin="0,3,0,0" IsEnabled="{DynamicResource Connected}" KeyUp="Button_Press" >
+			<TextBox x:Name="ConsoleInputV" HorizontalAlignment="Left" Height="31" TextWrapping="Wrap" VerticalAlignment="Top" Width="198" Foreground="#FF5DFF00" Background="Black" Margin="0,3,0,0" IsEnabled="{DynamicResource Connected}" KeyUp="Button_Press" CaretBrush="Red" >
             <TextBox.InputBindings>
                 <KeyBinding Command="{Binding Send_Button_Click}" Key="Enter" />
             </TextBox.InputBindings>

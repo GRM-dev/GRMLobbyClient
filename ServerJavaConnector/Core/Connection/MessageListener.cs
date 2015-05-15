@@ -30,13 +30,13 @@ namespace ServerJavaConnector.Core.Connection
                 String msg = PacketParser.receivePacket(Conn.ClientSocket);
                 if (!msg.Equals(""))
                 {
-                    if (MWindow.CommandManager.executeCommand(msg, Conn))
+                    if (MWindow.CommandManager.executeCommand(msg, Conn,true))
                     {
-                        Console.WriteLine("Command executed");
+                        Console.WriteLine("ServerSide Command executed");
                     }
                     else
                     {
-                        Console.WriteLine("Command not executed");
+                        Console.WriteLine("ServerSide Command not executed");
                     }
                 }
                 try

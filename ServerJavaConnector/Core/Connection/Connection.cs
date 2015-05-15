@@ -40,11 +40,10 @@ namespace ServerJavaConnector.Core.Connection
                 _clientSocket.Connect(serverAddress);
                 Connected = true;
                 listener.startListening();
-
             }
             catch (SocketException ex)
             {
-                CDialogManager.ShowExceptionDialog(ex, Port + " not found.");
+                CDialogManager.ShowExceptionDialog(ex, "Connection on address "+serverAddress.Address.ToString()+":"+Port + " not found.");
                 Connected = false;
             }
         }
@@ -54,7 +53,7 @@ namespace ServerJavaConnector.Core.Connection
             if (_clientSocket != null)
             {
                 listener.stopListening();
-                
+
                 if (_clientSocket.Connected == true)
                 {
                     _clientSocket.Shutdown(SocketShutdown.Both);
