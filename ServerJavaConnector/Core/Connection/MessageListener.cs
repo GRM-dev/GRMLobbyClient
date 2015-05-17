@@ -35,11 +35,11 @@ namespace ServerJavaConnector.Core.Connection
                     {
                         if (MWindow.CommandManager.executeCommand(msg, Conn, true))
                         {
-                            Console.WriteLine("ServerSide Command executed");
+                            Console.WriteLine("ServerSide Command executed: "+msg);
                         }
                         else
                         {
-                            Console.WriteLine("ServerSide Command not executed");
+                            Console.WriteLine("ServerSide Command not executed: "+msg);
                         }
                     }
                     try

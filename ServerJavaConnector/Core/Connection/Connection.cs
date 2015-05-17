@@ -1,4 +1,5 @@
-﻿using ServerJavaConnector.XAML;
+﻿using ServerJavaConnector.Core.Commands;
+using ServerJavaConnector.XAML;
 using ServerJavaConnector.XAML.Dialogs;
 using ServerJavaConnector.XAML.Pages;
 using System;
@@ -43,7 +44,7 @@ namespace ServerJavaConnector.Core.Connection
             }
             catch (SocketException ex)
             {
-                CDialogManager.ShowExceptionDialog(ex, "Connection on address "+serverAddress.Address.ToString()+":"+Port + " not found.");
+                CDialogManager.ShowExceptionDialog(ex, "Connection on address " + serverAddress.Address.ToString() + ":" + Port + " not found.");
                 Connected = false;
             }
         }
@@ -56,6 +57,7 @@ namespace ServerJavaConnector.Core.Connection
 
                 if (_clientSocket.Connected == true)
                 {
+                    MainWindow.instance.CommandManager.executeCommand(Command.CLOSECONN, this);
                     _clientSocket.Shutdown(SocketShutdown.Both);
                 }
                 _clientSocket.Close();

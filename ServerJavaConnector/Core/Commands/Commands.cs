@@ -47,7 +47,27 @@ namespace ServerJavaConnector.Core.Commands
                 {
                     continue;
                 }
-                if (commS.ToLower().StartsWith(commT.CommandString)) { return commT; }
+                if (commS.ToLower().StartsWith(commT.CommandString))
+                {
+                    return commT;
+                }
+            }
+            return NONE;
+        }
+
+        public static Commands getCommand(Command command)
+        {
+            foreach (KeyValuePair<Command, Commands> commPair in CommandsList)
+            {
+                Commands commT = commPair.Value;
+                if (commT == NONE || commT == ERROR)
+                {
+                    continue;
+                }
+                if (command.Equals(commT.Comm))
+                {
+                    return commT;
+                }
             }
             return NONE;
         }
@@ -57,7 +77,7 @@ namespace ServerJavaConnector.Core.Commands
             Commands comm = getCommand(commS);
             if (comm == NONE) { return commS; }
             commS = commS.Replace(comm.CommandString, "");
-            if (commS.Length > 1&&commS[2]==' ')
+            if (commS.Length > 1 && commS[2] == ' ')
             {
                 commS = commS.Substring(1);
             }

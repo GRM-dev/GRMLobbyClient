@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using ServerJavaConnector.Core;
 using ServerJavaConnector.Core.Connection;
 using ServerJavaConnector.Core.JSON;
+using ServerJavaConnector.XAML.Dialogs;
 
 namespace ServerJavaConnector.Core.Commands
 {
@@ -25,15 +26,22 @@ namespace ServerJavaConnector.Core.Commands
 
         public Boolean executeCommand(String command, Connection.Connection conn = null, bool invokedByServer = false)
         {
-            Console.WriteLine("......|executing|.........");
+            Console.WriteLine("......|executing: "+command+"|.........");
             Commands comm = Commands.getCommand(command);
             String args = Commands.Offset(command);
             return executeCommand(comm, args, conn, false);
         }
 
+        public Boolean executeCommand(Command command, Connection.Connection connection)
+        {
+            Commands comm = Commands.getCommand(command);
+            return executeCommand(comm, null, connection);
+        }
+
         public Boolean executeCommand(Commands comm, String args = null, Connection.Connection conn = null, bool invokedByServer = false)
         {
-            if(comm.RequireConnection&&(conn==null||!conn.Connected)){
+            if (comm.RequireConnection && (conn == null || !conn.Connected))
+            {
                 return false;
             }
             switch (comm.Comm)
@@ -55,7 +63,10 @@ namespace ServerJavaConnector.Core.Commands
                     JsonParser.sendUserData(conn.UserData, conn.ClientSocket);
                     return true;
                 case Command.CLOSE:
-                    PacketParser.sendPacket(Commands.CLOSE.CommandString + args, conn.ClientSocket);
+                    CDialogManager.ShowClosingDialog();
+                    return true;
+                case Command.CLOSECONN:
+                    PacketParser.sendPacket(Commands.CLOSECONN.CommandString + args, conn.ClientSocket);
                     return true;
                 default:
                     return false;

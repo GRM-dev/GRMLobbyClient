@@ -43,53 +43,6 @@ namespace ServerJavaConnector.XAML.Pages
             Dispatcher.Invoke(DispatcherPriority.Background, new Action(() => sendMsg()));
         }
 
-        private void sendMsg()
-        {
-            String input="";
-            try
-            {
-                input = ConsoleInput.Text;
-                if (!input.StartsWith("!"))
-                {
-                    input = "!say " + input;
-                }
-                var CM = MainWindow.instance.CommandManager;
-                if (CM.executeCommand(input, Conn))
-                {
-                    ConsoleInput.Text = "";
-                    Commands cmd = Commands.getCommand(input);
-                    if (cmd != Commands.NONE && cmd != Commands.ERROR)
-                    {
-                        int len;
-                        if (cmd != Commands.SAY)
-                        {
-                            len = 0;
-                        }
-                        else
-                        {
-                            len = cmd.CommandString.Length;
-                        }
-                        CM.AddCommandToList(input.Substring(len, input.Length - len));
-                        WriteLine("Command executed");
-                    }
-                    else
-                    {
-                        WriteLine("Command executed but there was something wrong", Brushes.Yellow);
-                    }
-                }
-                else
-                {
-                    WriteLine("Command not executed!", Brushes.Red);
-                }
-            }
-            catch (Exception ex)
-            {
-                CDialogManager.ShowExceptionDialog(ex, "You are disconnected!");
-                Conn.Disconnect();
-            }
-            Send_Button.SetResourceReference(Control.IsEnabledProperty, "Connected");
-        }
-
         private void Close_Button_Click(object sender, RoutedEventArgs e)
         {
             CDialogManager.ShowClosingDialog();
@@ -152,6 +105,54 @@ namespace ServerJavaConnector.XAML.Pages
             tr.ApplyPropertyValue(TextElement.ForegroundProperty, color);
             ConsoleBoxV.AppendText("\n");
         }
+
+        private void sendMsg()
+        {
+            String input = "";
+            try
+            {
+                input = ConsoleInput.Text;
+                if (!input.StartsWith("!"))
+                {
+                    input = "!say " + input;
+                }
+                var CM = MainWindow.instance.CommandManager;
+                if (CM.executeCommand(input, Conn))
+                {
+                    ConsoleInput.Text = "";
+                    Commands cmd = Commands.getCommand(input);
+                    if (cmd != Commands.NONE && cmd != Commands.ERROR)
+                    {
+                        int len;
+                        if (cmd != Commands.SAY)
+                        {
+                            len = 0;
+                        }
+                        else
+                        {
+                            len = cmd.CommandString.Length;
+                        }
+                        CM.AddCommandToList(input.Substring(len, input.Length - len));
+                        WriteLine("Command executed");
+                    }
+                    else
+                    {
+                        WriteLine("Command executed but there was something wrong", Brushes.Yellow);
+                    }
+                }
+                else
+                {
+                    WriteLine("Command not executed!", Brushes.Red);
+                }
+            }
+            catch (Exception ex)
+            {
+                CDialogManager.ShowExceptionDialog(ex, "You are disconnected!");
+                Conn.Disconnect();
+            }
+            Send_Button.SetResourceReference(Control.IsEnabledProperty, "Connected");
+        }
+
 
         protected void OnPropertyChanged(string propertyName)
         {
