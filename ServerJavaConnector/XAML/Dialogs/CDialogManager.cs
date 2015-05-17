@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace ServerJavaConnector.XAML.Dialogs
 {
@@ -17,7 +18,7 @@ namespace ServerJavaConnector.XAML.Dialogs
         {
             CFrame frame = PageManager.instance.getFrame(FrameType.TopFrame);
             var page = PageManager.instance.getPage(PageType.InfoPage) as InfoPage;
-            page.setInfo(title,message);
+            page.setInfo(title, message);
             PageManager.instance.changePage(FrameType.TopFrame, PageType.InfoPage);
             MainWindow mWindow = (MainWindow)Application.Current.MainWindow;
             var flyout = mWindow.Flyouts.Items[1] as Flyout;
@@ -37,13 +38,13 @@ namespace ServerJavaConnector.XAML.Dialogs
 
         public static async void ShowExceptionDialog(Exception ex, String msg)
         {
-            var metroWindow = Application.Current.MainWindow as MainWindow;
             if (msg == null)
             {
                 msg = "";
             }
             msg += "\r\n" + ex.Message;
-            if (metroWindow.IsLoaded)
+            var metroWindow = MainWindow.instance;
+            if (metroWindow.WindowLoaded)
             {
                 await DialogManager.ShowMessageAsync(metroWindow, "Exception", msg);
             }

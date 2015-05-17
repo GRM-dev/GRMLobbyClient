@@ -33,14 +33,16 @@ namespace ServerJavaConnector
 
         public MainWindow()
         {
+            WindowLoaded = false;
             this.Conn = new Connection();
             instance = this;
             InitializeComponent();
             PageManager pM = new PageManager(getFrames());
             pM.initSetup();
             CommandManager = new CommandManager(this);
+            this.Loaded += new RoutedEventHandler(MainWindow_Loaded);
         }
-
+            
         private Dictionary<FrameType, CFrame> getFrames()
         {
             Dictionary<FrameType, CFrame> frames = new Dictionary<FrameType, CFrame>();
@@ -65,6 +67,11 @@ namespace ServerJavaConnector
             CDialogManager.ShowClosingDialog();
         }
 
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            WindowLoaded = true;
+        }
+
         public Connection Conn { get; private set; }
 
         public CommandManager CommandManager
@@ -72,5 +79,7 @@ namespace ServerJavaConnector
             get { return _CM; }
             private set { _CM = value; }
         }
+
+        public bool WindowLoaded { get; private set; }
     }
 }

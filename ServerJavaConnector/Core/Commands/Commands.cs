@@ -9,26 +9,28 @@ namespace ServerJavaConnector.Core.Commands
     public class Commands
     {
         private Command _comm;
-        private CommandType type;
+        private CommandType _type;
+        private bool _requireConnection;
 
-        private Commands(Command name, CommandType type)
+        private Commands(Command name, CommandType type, bool requireConnection)
         {
             this._comm = name;
-            this.type = type;
+            this._type = type;
+            this._requireConnection = requireConnection;
         }
 
         public static void Init()
         {
             CommandsList = new Dictionary<Command, Commands>();
-            Add(NONE = new Commands(Command.NONE, CommandType.NONE));
-            Add(ERROR = new Commands(Command.ERROR, CommandType.NONE));
-            Add(MSG = new Commands(Command.MSG, CommandType.SERVER));
-            Add(JSON = new Commands(Command.JSON, CommandType.BOTH));
-            Add(CLOSECONN = new Commands(Command.CLOSECONN, CommandType.BOTH));
-            Add(CLOSE = new Commands(Command.CLOSE, CommandType.CLIENT));
-            Add(SAY = new Commands(Command.SAY, CommandType.CLIENT));
-            Add(LIST = new Commands(Command.LIST, CommandType.CLIENT));
-            Add(GETUSERDATA = new Commands(Command.GETUSERDATA, CommandType.SERVER));
+            Add(NONE = new Commands(Command.NONE, CommandType.NONE, false));
+            Add(ERROR = new Commands(Command.ERROR, CommandType.NONE, false));
+            Add(MSG = new Commands(Command.MSG, CommandType.SERVER, true));
+            Add(JSON = new Commands(Command.JSON, CommandType.BOTH, true));
+            Add(CLOSECONN = new Commands(Command.CLOSECONN, CommandType.BOTH, true));
+            Add(CLOSE = new Commands(Command.CLOSE, CommandType.CLIENT, false));
+            Add(SAY = new Commands(Command.SAY, CommandType.CLIENT, true));
+            Add(LIST = new Commands(Command.LIST, CommandType.BOTH, true));
+            Add(GETUSERDATA = new Commands(Command.GETUSERDATA, CommandType.SERVER, true));
         }
 
         private static void Add(Commands cmm)
@@ -45,27 +47,41 @@ namespace ServerJavaConnector.Core.Commands
                 {
                     continue;
                 }
-                if (commS.ToLower().StartsWith(commT.getCommandString())) { return commT; }
+                if (commS.ToLower().StartsWith(commT.CommandString)) { return commT; }
             }
             return NONE;
         }
 
-        public static String getOffset(String commS)
+        public static String Offset(String commS)
         {
             Commands comm = getCommand(commS);
             if (comm == NONE) { return commS; }
-            commS = commS.Replace(comm.getCommandString(), "");
+            commS = commS.Replace(comm.CommandString, "");
+            if (commS.Length > 1&&commS[2]==' ')
+            {
+                commS = commS.Substring(1);
+            }
             return commS;
         }
 
-        public String getCommandString()
+        public String CommandString
         {
-            return "!" + Comm.ToString().ToLower();
+            get { return "!" + Comm.ToString().ToLower(); }
         }
 
-        public CommandType getType()
+        public CommandType Type
         {
-            return type;
+            get { return _type; }
+        }
+
+        public Command Comm
+        {
+            get { return _comm; }
+        }
+
+        public bool RequireConnection
+        {
+            get { return _requireConnection; }
         }
 
         public static Dictionary<Command, Commands> CommandsList { get; private set; }
@@ -78,11 +94,6 @@ namespace ServerJavaConnector.Core.Commands
         public static Commands SAY { get; private set; }
         public static Commands LIST { get; private set; }
         public static Commands GETUSERDATA { get; private set; }
-
-        public Command Comm
-        {
-            get { return _comm; }
-        }
     }
 
     public enum Command

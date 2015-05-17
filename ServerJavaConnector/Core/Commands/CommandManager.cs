@@ -27,12 +27,15 @@ namespace ServerJavaConnector.Core.Commands
         {
             Console.WriteLine("......|executing|.........");
             Commands comm = Commands.getCommand(command);
-            String args = Commands.getOffset(command);
+            String args = Commands.Offset(command);
             return executeCommand(comm, args, conn, false);
         }
 
         public Boolean executeCommand(Commands comm, String args = null, Connection.Connection conn = null, bool invokedByServer = false)
         {
+            if(comm.RequireConnection&&(conn==null||!conn.Connected)){
+                return false;
+            }
             switch (comm.Comm)
             {
                 case Command.NONE:
@@ -46,10 +49,13 @@ namespace ServerJavaConnector.Core.Commands
         }));
                     return true;
                 case Command.SAY:
-                    PacketParser.sendPacket(Commands.SAY.getCommandString() + args, conn.ClientSocket);
+                    PacketParser.sendPacket(Commands.SAY.CommandString + args, conn.ClientSocket);
                     return true;
                 case Command.GETUSERDATA:
                     JsonParser.sendUserData(conn.UserData, conn.ClientSocket);
+                    return true;
+                case Command.CLOSE:
+                    PacketParser.sendPacket(Commands.CLOSE.CommandString + args, conn.ClientSocket);
                     return true;
                 default:
                     return false;

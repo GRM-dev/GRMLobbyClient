@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -13,6 +14,10 @@ namespace ServerJavaConnector.Core.Connection
     {
         public static string receivePacket(Socket clientSocket)
         {
+            if (!clientSocket.Connected)
+            {
+                throw new IOException("You are not connected!");
+            }
             NetworkStream stream = new NetworkStream(clientSocket);
             StringBuilder str = new StringBuilder();
             while (true)
@@ -39,6 +44,10 @@ namespace ServerJavaConnector.Core.Connection
 
         public static void sendPacket(string msg, Socket clientSocket)
         {
+            if (!clientSocket.Connected)
+            {
+                throw new IOException("You are not connected!");
+            }
             if (msg.Length > 0)
             {
                 NetworkStream stream = new NetworkStream(clientSocket);

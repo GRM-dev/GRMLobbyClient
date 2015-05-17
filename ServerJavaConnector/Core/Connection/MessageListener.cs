@@ -5,6 +5,7 @@ using ServerJavaConnector.XAML.Pages;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -25,28 +26,36 @@ namespace ServerJavaConnector.Core.Connection
         public void run()
         {
             MainWindow MWindow = MainWindow.instance;
-            while (MWindow.Conn.Connected && listening)
+            try
             {
-                String msg = PacketParser.receivePacket(Conn.ClientSocket);
-                if (!msg.Equals(""))
+                while (MWindow.Conn.Connected && listening)
                 {
-                    if (MWindow.CommandManager.executeCommand(msg, Conn,true))
+                    String msg = PacketParser.receivePacket(Conn.ClientSocket);
+                    if (!msg.Equals(""))
                     {
-                        Console.WriteLine("ServerSide Command executed");
+                        if (MWindow.CommandManager.executeCommand(msg, Conn, true))
+                        {
+                            Console.WriteLine("ServerSide Command executed");
+                        }
+                        else
+                        {
+                            Console.WriteLine("ServerSide Command not executed");
+                        }
                     }
-                    else
+                    try
                     {
-                        Console.WriteLine("ServerSide Command not executed");
+                        Thread.Sleep(1000);
+                    }
+                    catch (ThreadInterruptedException ex)
+                    {
+                        CDialogManager.ShowExceptionDialog(ex, null);
                     }
                 }
-                try
-                {
-                    Thread.Sleep(1000);
-                }
-                catch (ThreadInterruptedException ex)
-                {
-                    CDialogManager.ShowExceptionDialog(ex, null);
-                }
+            }
+            catch (IOException e)
+            {
+                CDialogManager.ShowExceptionDialog(e, null);
+                Conn.Disconnect();
             }
         }
 

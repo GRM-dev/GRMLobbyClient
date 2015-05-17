@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,6 +17,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace ServerJavaConnector.XAML.Pages
 {
@@ -36,17 +38,20 @@ namespace ServerJavaConnector.XAML.Pages
         private void Send_Button_Click(object sender, RoutedEventArgs e)
         {
             if (!Conn.Connected) { return; }
+            var btn = sender as Button;
+            btn.IsEnabled = false;
+            Dispatcher.Invoke(DispatcherPriority.Background, new Action(() => sendMsg()));
+        }
+
+        private void sendMsg()
+        {
+            String input="";
             try
             {
-                String input = ConsoleInput.Text;
+                input = ConsoleInput.Text;
                 if (!input.StartsWith("!"))
                 {
-                    WriteLine(input);
                     input = "!say " + input;
-                }
-                else
-                {
-                    WriteLine(input);
                 }
                 var CM = MainWindow.instance.CommandManager;
                 if (CM.executeCommand(input, Conn))
@@ -62,7 +67,7 @@ namespace ServerJavaConnector.XAML.Pages
                         }
                         else
                         {
-                            len = cmd.getCommandString().Length;
+                            len = cmd.CommandString.Length;
                         }
                         CM.AddCommandToList(input.Substring(len, input.Length - len));
                         WriteLine("Command executed");
@@ -79,9 +84,10 @@ namespace ServerJavaConnector.XAML.Pages
             }
             catch (Exception ex)
             {
-                CDialogManager.ShowExceptionDialog(ex, "While sending");
+                CDialogManager.ShowExceptionDialog(ex, "You are disconnected!");
                 Conn.Disconnect();
             }
+            Send_Button.SetResourceReference(Control.IsEnabledProperty, "Connected");
         }
 
         private void Close_Button_Click(object sender, RoutedEventArgs e)
