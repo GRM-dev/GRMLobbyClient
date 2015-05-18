@@ -41,6 +41,7 @@ namespace ServerJavaConnector
             pM.initSetup();
             CommandManager = new CommandManager(this);
             this.Loaded += new RoutedEventHandler(MainWindow_Loaded);
+            //MainFrame.Navigate(new GLPage());
         }
             
         private Dictionary<FrameType, CFrame> getFrames()
@@ -81,5 +82,12 @@ namespace ServerJavaConnector
         }
 
         public bool WindowLoaded { get; private set; }
+
+        private void Settings_Button_Click(object sender, RoutedEventArgs e)
+        {
+            BottomFrame.Navigate(new GLPage());
+            var flyout = this.Flyouts.Items[0] as Flyout;
+            flyout.IsOpen = !flyout.IsOpen;
+        }
     }
 }

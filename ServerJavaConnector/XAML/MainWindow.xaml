@@ -7,6 +7,24 @@
         xmlns:Pages="clr-namespace:ServerJavaConnector.XAML.Pages"
         x:Class="ServerJavaConnector.MainWindow"
         Title="Java Chat Client" Height="600" Width="800" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" ScrollViewer.VerticalScrollBarVisibility="Auto" RightWindowCommandsOverlayBehavior="Flyouts" SaveWindowPosition="True" EnableDWMDropShadow="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" WindowStyle="ThreeDBorderWindow">
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button Content="Settings" Click="Settings_Button_Click" />
+            <Button>
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle x:Name="rectangle" Width="20" Height="20"
+                   Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_cupcake}"/>
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Margin="4 0 0 0"
+                   VerticalAlignment="Center"
+                   Text="deploy cupcakes" />
+                </StackPanel>
+            </Button>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl x:Name="FlyoutController">
             <Controls:Flyout Header="" Position="Bottom">
