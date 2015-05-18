@@ -1,25 +1,11 @@
 ﻿using MahApps.Metro.Controls;
-using MahApps.Metro.Controls.Dialogs;
-using ServerJavaConnector.Core;
-using ServerJavaConnector.Core.Commands;
+using ServerJavaConnector.Core.Commander;
 using ServerJavaConnector.Core.Connection;
-using ServerJavaConnector.XAML;
 using ServerJavaConnector.XAML.Dialogs;
 using ServerJavaConnector.XAML.Pages;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ServerJavaConnector
 {

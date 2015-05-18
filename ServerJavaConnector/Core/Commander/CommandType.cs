@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ServerJavaConnector.Core.Commands
+namespace ServerJavaConnector.Core.Commander
 {
     public enum CommandType
     {

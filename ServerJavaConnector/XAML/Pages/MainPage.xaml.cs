@@ -1,22 +1,13 @@
-﻿using MahApps.Metro.Controls;
-using MahApps.Metro.Controls.Dialogs;
-using ServerJavaConnector.Core.Commands;
+﻿using ServerJavaConnector.Core.Commander;
 using ServerJavaConnector.Core.Connection;
 using ServerJavaConnector.XAML.Dialogs;
-using ServerJavaConnector.XAML.Pages;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace ServerJavaConnector.XAML.Pages
@@ -60,7 +51,7 @@ namespace ServerJavaConnector.XAML.Pages
 
         private void Button_Press(object sender, KeyEventArgs e)
         {
-            ServerJavaConnector.Core.Commands.CommandManager commandManager = MainWindow.instance.CommandManager;
+            Core.Commander.CommandManager commandManager = MainWindow.instance.CommandManager;
             if (e.Key == Key.Up)
             {
                 String input = ConsoleInput.Text;
@@ -120,11 +111,11 @@ namespace ServerJavaConnector.XAML.Pages
                 if (CM.executeCommand(input, Conn))
                 {
                     ConsoleInput.Text = "";
-                    Commands cmd = Commands.getCommand(input);
-                    if (cmd != Commands.NONE && cmd != Commands.ERROR)
+                    Command cmd = Command.GetCommand(input);
+                    if (cmd != Command.GetCommand(Commands.NONE) && cmd != Command.GetCommand(Commands.ERROR))
                     {
                         int len;
-                        if (cmd != Commands.SAY)
+                        if (cmd != Command.GetCommand(Commands.SAY))
                         {
                             len = 0;
                         }

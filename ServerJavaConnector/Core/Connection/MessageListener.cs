@@ -1,15 +1,7 @@
-﻿using ServerJavaConnector.Core.Commands;
-using ServerJavaConnector.XAML;
-using ServerJavaConnector.XAML.Dialogs;
-using ServerJavaConnector.XAML.Pages;
+﻿using ServerJavaConnector.XAML.Dialogs;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace ServerJavaConnector.Core.Connection
 {

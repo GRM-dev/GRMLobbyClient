@@ -1,16 +1,10 @@
-﻿using ServerJavaConnector.Core.Commands;
-using ServerJavaConnector.XAML;
+﻿using ServerJavaConnector.Core.Commander;
 using ServerJavaConnector.XAML.Dialogs;
 using ServerJavaConnector.XAML.Pages;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace ServerJavaConnector.Core.Connection
 {
@@ -57,7 +51,7 @@ namespace ServerJavaConnector.Core.Connection
 
                 if (_clientSocket.Connected == true)
                 {
-                    MainWindow.instance.CommandManager.executeCommand(Command.CLOSECONN, this);
+                    MainWindow.instance.CommandManager.executeCommand(Commands.CLOSECONN, this);
                     _clientSocket.Shutdown(SocketShutdown.Both);
                 }
                 _clientSocket.Close();
