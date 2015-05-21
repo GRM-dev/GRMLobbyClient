@@ -25,7 +25,7 @@ namespace ServerJavaConnector.Core.Connection
                     String msg = PacketParser.receivePacket(Conn.ClientSocket);
                     if (!msg.Equals(""))
                     {
-                        if (MWindow.CommandManager.executeCommand(msg, Conn, true))
+                        if (MWindow.CommandManager.ExecuteCommand(msg, Conn, true))
                         {
                             Console.WriteLine("ServerSide Command executed: "+msg);
                         }

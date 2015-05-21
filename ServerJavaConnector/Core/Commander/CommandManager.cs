@@ -36,9 +36,9 @@ namespace ServerJavaConnector.Core.Commander
             CommandsList.Add(cmm.Comm, cmm);
         }
 
-        public Boolean executeCommand(String command, Connection.Connection conn = null, bool invokedByServer = false)
+        public Boolean ExecuteCommand(String command, Connection.Connection conn = null, bool invokedByServer = false)
         {
-            Console.WriteLine("......|executing: " + command + "|.........");
+            Console.WriteLine("......|trying to execute: " + command + "|.........");
             Commands comm;
             try {
                  comm = Command.GetEnumCommand(command); }
@@ -48,15 +48,15 @@ namespace ServerJavaConnector.Core.Commander
                 Console.WriteLine(e.Message);
             }
             String args = Command.Offset(command);
-            return executeCommand(comm, args, conn, false);
+            return ExecuteCommand(comm, args, conn, false);
         }
 
-        public Boolean executeCommand(Commands command, Connection.Connection connection)
+        public Boolean ExecuteCommand(Commands command, Connection.Connection connection)
         {
-            return executeCommand(command, null, connection);
+            return ExecuteCommand(command, null, connection);
         }
 
-        public Boolean executeCommand(Commands command, String args = null, Connection.Connection conn = null, bool invokedByServer = false)
+        public Boolean ExecuteCommand(Commands command, String args = null, Connection.Connection conn = null, bool invokedByServer = false)
         {
             Command comm = Command.GetCommand(command);
             if (comm.RequireConnection && (conn == null || !conn.Connected))
@@ -75,7 +75,7 @@ namespace ServerJavaConnector.Core.Commander
             lastCommands.Add(input);
         }
 
-        public String getLastCommand()
+        public String GetLastCommand()
         {
             if (lastCommands.Any())
             {
@@ -84,15 +84,15 @@ namespace ServerJavaConnector.Core.Commander
             return "";
         }
 
-        public bool wasExecuted(String input)
+        public bool WasExecuted(String input)
         {
             if (input != null && input != "" && lastCommands.Contains(input)) { return true; }
             return false;
         }
 
-        public String getPreviousCommand(String input)
+        public String GetPreviousCommand(String input)
         {
-            if (wasExecuted(input))
+            if (WasExecuted(input))
             {
                 int i = lastCommands.IndexOf(input);
                 if (i != 0) { return lastCommands[i - 1]; }
@@ -100,15 +100,15 @@ namespace ServerJavaConnector.Core.Commander
             return "";
         }
 
-        public bool hasNextCommand(String input)
+        public bool HasNextCommand(String input)
         {
-            if (wasExecuted(input) && lastCommands.IndexOf(input) < lastCommands.Count - 1) { return true; }
+            if (WasExecuted(input) && lastCommands.IndexOf(input) < lastCommands.Count - 1) { return true; }
             return false;
         }
 
-        public String getNextCommand(String input)
+        public String GetNextCommand(String input)
         {
-            if (hasNextCommand(input))
+            if (HasNextCommand(input))
             {
                 int i = lastCommands.IndexOf(input);
                 return lastCommands[i + 1];

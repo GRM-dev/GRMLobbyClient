@@ -23,26 +23,16 @@ namespace ServerJavaConnector.Core.Commander
 
         public static Command GetCommand(String commS)
         {
-            foreach (KeyValuePair<Commands, Command> commPair in CommandManager.CommandsList)
-            {
-                Command commT = commPair.Value;
-                if (commT.Comm == Commands.NONE || commT.Comm == Commands.ERROR)
-                {
-                    continue;
-                }
-                if (commS.ToLower().StartsWith(commT.CommandString))
-                {
-                    return commT;
-                }
-            }
-            return null;
+            Commands commE = GetEnumCommand(commS);
+            return GetCommand(commE);
         }
 
         public static Command GetCommand(Commands command)
         {
+            Command commT;
             foreach (KeyValuePair<Commands, Command> commPair in CommandManager.CommandsList)
             {
-                Command commT = commPair.Value;
+                commT = commPair.Value;
                 if (commT.Comm == Commands.NONE || commT.Comm == Commands.ERROR)
                 {
                     continue;
@@ -52,7 +42,8 @@ namespace ServerJavaConnector.Core.Commander
                     return commT;
                 }
             }
-            return null;
+            CommandManager.CommandsList.TryGetValue(Commands.ERROR, out commT);
+            return commT;
         }
 
         public static Commands GetEnumCommand(string command)
@@ -62,18 +53,27 @@ namespace ServerJavaConnector.Core.Commander
                 command = command.Substring(1);
             }
             command = command.ToUpper();
-            if(command.Contains(" "))
+            if (command.Contains(" "))
             {
                 int i = command.IndexOf(" ");
                 command = command.Substring(0, i);
             }
-            return (Commands)Enum.Parse(typeof(Commands), command);
+            Commands commE;
+            if (!Enum.TryParse(command, out commE))
+            {
+                commE = Commands.ERROR;
+            }
+            return commE;
         }
 
         public static String Offset(String commS)
         {
             Command comm = GetCommand(commS);
             if (comm.Comm == Commands.NONE) { return commS; }
+            else if (comm.Comm == Commands.ERROR)
+            {
+                return "";
+            }
             commS = commS.Replace(comm.CommandString, "");
             if (commS.Length > 1 && commS[2] == ' ')
             {

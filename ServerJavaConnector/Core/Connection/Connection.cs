@@ -51,7 +51,7 @@ namespace ServerJavaConnector.Core.Connection
 
                 if (_clientSocket.Connected == true)
                 {
-                    MainWindow.instance.CommandManager.executeCommand(Commands.CLOSECONN, this);
+                    MainWindow.instance.CommandManager.ExecuteCommand(Commands.CLOSECONN, this);
                     _clientSocket.Shutdown(SocketShutdown.Both);
                 }
                 _clientSocket.Close();

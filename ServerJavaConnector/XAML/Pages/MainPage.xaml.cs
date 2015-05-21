@@ -31,7 +31,7 @@ namespace ServerJavaConnector.XAML.Pages
             if (!Conn.Connected) { return; }
             var btn = sender as Button;
             btn.IsEnabled = false;
-            Dispatcher.Invoke(DispatcherPriority.Background, new Action(() => sendMsg()));
+            Dispatcher.Invoke(DispatcherPriority.Background, new Action(() => ExecuteMsg()));
         }
 
         private void Close_Button_Click(object sender, RoutedEventArgs e)
@@ -56,13 +56,13 @@ namespace ServerJavaConnector.XAML.Pages
             {
                 String input = ConsoleInput.Text;
                 if (input == null || input == ""
-                        || !commandManager.wasExecuted(input))
+                        || !commandManager.WasExecuted(input))
                 {
-                    ConsoleInput.Text = commandManager.getLastCommand();
+                    ConsoleInput.Text = commandManager.GetLastCommand();
                 }
                 else
                 {
-                    String previousCommand = commandManager.getPreviousCommand(input);
+                    String previousCommand = commandManager.GetPreviousCommand(input);
                     if (previousCommand != "")
                     {
                         ConsoleInput.Text = previousCommand;
@@ -72,9 +72,9 @@ namespace ServerJavaConnector.XAML.Pages
             else if (e.Key == Key.Down)
             {
                 String input = ConsoleInput.Text;
-                String nextCommand = commandManager.getNextCommand(input);
+                String nextCommand = commandManager.GetNextCommand(input);
                 if (nextCommand != ""
-                        || input.Equals(commandManager.getLastCommand()))
+                        || input.Equals(commandManager.GetLastCommand()))
                 {
                     ConsoleInput.Text = nextCommand;
                 }
@@ -97,7 +97,7 @@ namespace ServerJavaConnector.XAML.Pages
             ConsoleBoxV.AppendText("\n");
         }
 
-        private void sendMsg()
+        private void ExecuteMsg()
         {
             String input = "";
             try
@@ -108,7 +108,8 @@ namespace ServerJavaConnector.XAML.Pages
                     input = "!say " + input;
                 }
                 var CM = MainWindow.instance.CommandManager;
-                if (CM.executeCommand(input, Conn))
+                WriteLine(input);
+                if (CM.ExecuteCommand(input, Conn))
                 {
                     ConsoleInput.Text = "";
                     Command cmd = Command.GetCommand(input);
@@ -139,7 +140,8 @@ namespace ServerJavaConnector.XAML.Pages
             catch (Exception ex)
             {
                 CDialogManager.ShowExceptionDialog(ex, "You are disconnected!");
-                Conn.Disconnect();
+                //Conn.Disconnect(); 
+                //TODO:uncomment
             }
             Send_Button.SetResourceReference(Control.IsEnabledProperty, "Connected");
         }
