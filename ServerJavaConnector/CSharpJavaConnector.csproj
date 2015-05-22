@@ -180,7 +180,7 @@
     </Compile>
     <Compile Include="Core\Commander\CommandManager.cs" />
     <Compile Include="Core\Connection\Connection.cs" />
-    <Compile Include="Core\Connection\MessageListener.cs" />
+    <Compile Include="Core\Connection\WebMessageListener.cs" />
     <Compile Include="XAML\Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>

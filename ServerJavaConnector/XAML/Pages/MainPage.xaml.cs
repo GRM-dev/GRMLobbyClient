@@ -140,8 +140,7 @@ namespace ServerJavaConnector.XAML.Pages
             catch (Exception ex)
             {
                 CDialogManager.ShowExceptionDialog(ex, "You are disconnected!");
-                //Conn.Disconnect(); 
-                //TODO:uncomment
+                Conn.Disconnect();
             }
             Send_Button.SetResourceReference(Control.IsEnabledProperty, "Connected");
         }

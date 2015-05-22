@@ -11,10 +11,12 @@ namespace ServerJavaConnector.Core.JSON
 {
     public class JsonParser
     {
-        public static void sendUserData(User user, Socket socket)
+        public static void sendData(Object obj, Socket socket, int action = 0)
         {
-            String objS = "{\"name\":\"User\",\"object\":"+JsonConvert.SerializeObject(user)+"}";
-            Console.WriteLine("send " + objS);
+            String objS = "{\"type\":\"" + obj.GetType().Name + "\",";
+            objS += "\"action\":" + action + ",";
+            objS += "\"object\": " + JsonConvert.SerializeObject(obj) + "}";
+            Console.WriteLine("sending: " + objS);
             PacketParser.sendPacket(objS, socket);
         }
 
@@ -28,7 +30,7 @@ namespace ServerJavaConnector.Core.JSON
             }
             try
             {
-                Console.WriteLine("rec " + rec);
+                Console.WriteLine("received: " + rec);
                 User user = JsonConvert.DeserializeObject<User>(rec);
                 Console.WriteLine(user.Name);
                 return user;

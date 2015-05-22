@@ -12,7 +12,7 @@ namespace ServerJavaConnector.Core.Commander.Comms
 
         public override bool executeCommand(string args = null, Connection.Connection conn = null, bool invokedByServer = false)
         {
-            JsonParser.sendUserData(conn.UserData, conn.ClientSocket);
+            JsonParser.sendData(conn.UserData, conn.ClientSocket);
             return true;
         }
     }
