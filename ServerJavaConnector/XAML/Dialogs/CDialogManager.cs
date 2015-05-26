@@ -16,10 +16,10 @@ namespace ServerJavaConnector.XAML.Dialogs
 
         public static void ShowInfoTop(String title, String message)
         {
-            CFrame frame = PageManager.instance.getFrame(FrameType.TopFrame);
-            var page = PageManager.instance.getPage(PageType.InfoPage) as InfoPage;
+            CFrame frame = PageManager.Instance.GetFrame(FrameType.TopFrame);
+            var page = PageManager.Instance.GetPage(PageType.InfoPage) as InfoPage;
             page.setInfo(title, message);
-            PageManager.instance.changePage(FrameType.TopFrame, PageType.InfoPage);
+            PageManager.Instance.ChangePage(FrameType.TopFrame, PageType.InfoPage);
             MainWindow mWindow = (MainWindow)Application.Current.MainWindow;
             var flyout = mWindow.Flyouts.Items[1] as Flyout;
             flyout.IsOpen = true;
@@ -27,10 +27,10 @@ namespace ServerJavaConnector.XAML.Dialogs
 
         public static void ShowInfoBottom(String title, String message)
         {
-            CFrame frame = PageManager.instance.getFrame(FrameType.BottomFrame);
-            var page = PageManager.instance.getPage(PageType.InfoPage) as InfoPage;
+            CFrame frame = PageManager.Instance.GetFrame(FrameType.BottomFrame);
+            var page = PageManager.Instance.GetPage(PageType.InfoPage) as InfoPage;
             page.setInfo(title, message);
-            PageManager.instance.changePage(FrameType.BottomFrame, PageType.InfoPage);
+            PageManager.Instance.ChangePage(FrameType.BottomFrame, PageType.InfoPage);
             MainWindow mWindow = (MainWindow)Application.Current.MainWindow;
             var flyout = mWindow.Flyouts.Items[0] as Flyout;
             flyout.IsOpen = true;

@@ -24,7 +24,7 @@ namespace ServerJavaConnector
             instance = this;
             InitializeComponent();
             PageManager pM = new PageManager(getFrames());
-            pM.initSetup();
+            pM.InitSetup();
             CommandManager = new CommandManager(this);
             this.Loaded += new RoutedEventHandler(MainWindow_Loaded);
             //MainFrame.Navigate(new GLPage());
@@ -37,6 +37,13 @@ namespace ServerJavaConnector
             frames.Add(FrameType.TopFrame, TopFrame);
             frames.Add(FrameType.BottomFrame, BottomFrame);
             return frames;
+        }
+
+        private void Settings_Button_Click(object sender, RoutedEventArgs e)
+        {
+            BottomFrame.Navigate(new GLPage());
+            var flyout = this.Flyouts.Items[0] as Flyout;
+            flyout.IsOpen = !flyout.IsOpen;
         }
 
         public static void CloseApp()
@@ -68,12 +75,5 @@ namespace ServerJavaConnector
         }
 
         public bool WindowLoaded { get; private set; }
-
-        private void Settings_Button_Click(object sender, RoutedEventArgs e)
-        {
-            BottomFrame.Navigate(new GLPage());
-            var flyout = this.Flyouts.Items[0] as Flyout;
-            flyout.IsOpen = !flyout.IsOpen;
-        }
     }
 }

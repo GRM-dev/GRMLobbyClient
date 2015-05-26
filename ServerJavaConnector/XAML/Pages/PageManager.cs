@@ -19,27 +19,30 @@ namespace ServerJavaConnector.XAML.Pages
 
         public PageManager(Dictionary<FrameType, CFrame> frames)
         {
-            instance = this;
+            Instance = this;
             this.Frames = frames;
-            this.Pages = getPages();
+            this.Pages = GetPages();
+            this.Frames.Add(FrameType.MainRightFrame, ((MainPage)GetPage(PageType.MainPage)).RightFrame);
         }
 
-        private static Dictionary<PageType, Page> getPages()
+        private static Dictionary<PageType, Page> GetPages()
         {
             Dictionary<PageType, Page> pages = new Dictionary<PageType, Page>();
             pages.Add(PageType.MainPage, new MainPage());
             pages.Add(PageType.LoginPage, new LoginPage());
             //TODO: pages.Add(PageType.RegisterPage, new RegisterPage()); 
             pages.Add(PageType.InfoPage, new InfoPage());
+            pages.Add(PageType.ChatPage,new ChatPage());
             return pages;
         }
 
         /// <summary>
         /// Initial startup setup of frames
         /// </summary>
-        public void initSetup()
+        public void InitSetup()
         {
-            getFrame(FrameType.MainFrame).AddAndChangePage(getPage(PageType.MainPage));
+            GetFrame(FrameType.MainFrame).AddAndChangePage(GetPage(PageType.MainPage));
+            GetFrame(FrameType.MainRightFrame).AddAndChangePage(GetPage(PageType.ChatPage));
         }
 
         /// <summary>
@@ -48,10 +51,10 @@ namespace ServerJavaConnector.XAML.Pages
         /// <param name="fT"></param>
         /// <param name="pT"></param>
         /// <returns>True if successfully changed. False when page is opened in different frame.</returns>
-        public bool changePage(FrameType fT, PageType pT)
+        public bool ChangePage(FrameType fT, PageType pT)
         {
-            CFrame frame=getFrame(fT);
-            Page page=getPage(pT);
+            CFrame frame=GetFrame(fT);
+            Page page=GetPage(pT);
             foreach (KeyValuePair<FrameType, CFrame> entry in Frames)
             {
                 if (entry.Value.Content == page)
@@ -63,20 +66,20 @@ namespace ServerJavaConnector.XAML.Pages
             return true;
         }
 
-        public Page getPage(PageType pT){
+        public Page GetPage(PageType pT){
             Page page;
             Pages.TryGetValue(pT, out page);
             return page;
         }
 
-        public CFrame getFrame(FrameType fT)
+        public CFrame GetFrame(FrameType fT)
         {
             CFrame frame;
             Frames.TryGetValue(fT, out frame);
             return frame;
         }
 
-        public CFrame getFrame(Page page)
+        public CFrame GetFrame(Page page)
         {
             foreach (KeyValuePair<FrameType, CFrame> entry in Frames)
             {
@@ -88,7 +91,7 @@ namespace ServerJavaConnector.XAML.Pages
             return null;
         }
 
-        public static PageManager instance { get; private set; }
+        public static PageManager Instance { get; private set; }
 
         public Dictionary<FrameType, CFrame> Frames
         {
@@ -105,11 +108,11 @@ namespace ServerJavaConnector.XAML.Pages
 
     public enum PageType
     {
-        MainPage, LoginPage, RegisterPage, InfoPage
+        MainPage, LoginPage, RegisterPage, InfoPage, ChatPage
     }
 
     public enum FrameType
     {
-        MainFrame, TopFrame, BottomFrame
+        MainFrame, TopFrame, BottomFrame, MainRightFrame
     }
 }

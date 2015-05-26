@@ -132,6 +132,9 @@
     <Compile Include="XAML\Pages\CFrame.xaml.cs">
       <DependentUpon>CFrame.xaml</DependentUpon>
     </Compile>
+    <Compile Include="XAML\Pages\ChatPage.xaml.cs">
+      <DependentUpon>ChatPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="XAML\Pages\GLPage.xaml.cs">
       <DependentUpon>GLPage.xaml</DependentUpon>
     </Compile>
@@ -152,6 +155,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="XAML\Pages\ChatPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="XAML\Pages\GLPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -164,7 +171,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="XAML\Pages\MainPage.xaml">
+    <Page Include="XAML\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -184,7 +191,7 @@
     <Compile Include="XAML\Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="XAML\Pages\MainPage.xaml.cs">
+    <Compile Include="XAML\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="XAML\MainWindow.xaml.cs">

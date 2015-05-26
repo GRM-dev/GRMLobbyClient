@@ -24,7 +24,7 @@ namespace ServerJavaConnector.XAML.Pages
         public CFrame()
         {
             InitializeComponent();
-            pageHistory = new Dictionary<int,Page>();
+            PageHistory = new Dictionary<int,Page>();
             CurrentPageID = 0;
         }
 
@@ -32,7 +32,7 @@ namespace ServerJavaConnector.XAML.Pages
         {
             CurrentPage = page;
             Navigate(CurrentPage);
-            pageHistory[++CurrentPageID]=page;
+            PageHistory[++CurrentPageID]=page;
         }
 
         public void goBack()
@@ -40,14 +40,14 @@ namespace ServerJavaConnector.XAML.Pages
             if (CurrentPageID > 1)
             {
                 Page prevPage;
-                pageHistory.TryGetValue(--CurrentPageID, out prevPage);
+                PageHistory.TryGetValue(--CurrentPageID, out prevPage);
                 CurrentPage = prevPage;
                 Navigate(CurrentPage);
             }
         }
 
         public int CurrentPageID { get; private set; }
-        public Dictionary<Int32,Page> pageHistory { get; private set; }
+        public Dictionary<Int32,Page> PageHistory { get; private set; }
         public Page CurrentPage { get; private set; }
     }
 }

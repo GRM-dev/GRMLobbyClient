@@ -14,7 +14,7 @@ namespace ServerJavaConnector.Core.Commander.Comms
         {
             MainWindow.instance.Dispatcher.BeginInvoke(new Action(() =>
             {
-                ((MainPage)PageManager.instance.getPage(PageType.MainPage)).WriteLine(args);
+                ((ChatPage)PageManager.Instance.GetPage(PageType.ChatPage)).WriteLine(args);
             }));
             return true;
         }

@@ -12,41 +12,19 @@ using System.Windows.Threading;
 
 namespace ServerJavaConnector.XAML.Pages
 {
-    public partial class MainPage : Page, INotifyPropertyChanged
+    /// <summary>
+    /// Interaction logic for ChatPage.xaml
+    /// </summary>
+    public partial class ChatPage : Page, INotifyPropertyChanged
     {
+        private static ChatPage instance;
         public event PropertyChangedEventHandler PropertyChanged;
-        private static MainPage instance;
 
-        public MainPage()
+        public ChatPage()
         {
-            instance = this;
             InitializeComponent();
-            this.ConsoleOutput = ConsoleBoxV;
-            this.ConsoleInput = ConsoleInputV;
+            instance = this;
             this.Conn = MainWindow.instance.Conn;
-        }
-
-        private void Send_Button_Click(object sender, RoutedEventArgs e)
-        {
-            if (!Conn.Connected) { return; }
-            var btn = sender as Button;
-            btn.IsEnabled = false;
-            Dispatcher.Invoke(DispatcherPriority.Background, new Action(() => ExecuteMsg()));
-        }
-
-        private void Close_Button_Click(object sender, RoutedEventArgs e)
-        {
-            CDialogManager.ShowClosingDialog();
-        }
-
-        private void Connect_Button_Click(object sender, RoutedEventArgs e)
-        {
-            PageManager.instance.changePage(FrameType.MainFrame, PageType.LoginPage);
-        }
-
-        private void Disconnect_Button_Click(object sender, RoutedEventArgs e)
-        {
-            Conn.Disconnect();
         }
 
         private void Button_Press(object sender, KeyEventArgs e)
@@ -81,10 +59,19 @@ namespace ServerJavaConnector.XAML.Pages
             }
         }
 
+        private void Send_Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (!Conn.Connected) { return; }
+            var btn = sender as Button;
+            btn.IsEnabled = false;
+            Dispatcher.Invoke(DispatcherPriority.Background, new Action(() => ExecuteMsg()));
+        }
+
         public void WriteLine(String msg)
         {
             WriteLine(msg, Brushes.LightGreen);
         }
+
         public void WriteLine(String msg, Brush color)
         {
             if (color == null)
@@ -145,7 +132,6 @@ namespace ServerJavaConnector.XAML.Pages
             Send_Button.SetResourceReference(Control.IsEnabledProperty, "Connected");
         }
 
-
         protected void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
@@ -163,9 +149,7 @@ namespace ServerJavaConnector.XAML.Pages
                 instance.OnPropertyChanged(p);
             }
         }
-
+      
         public Connection Conn { get; private set; }
-        public TextBox ConsoleInput { get; private set; }
-        public RichTextBox ConsoleOutput { get; private set; }
     }
 }

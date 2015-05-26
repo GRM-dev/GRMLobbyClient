@@ -46,7 +46,7 @@ namespace ServerJavaConnector.XAML.Pages
 
         private void Back_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            PageManager.instance.getFrame(this).goBack();
+            PageManager.Instance.GetFrame(this).goBack();
         }
     }
 }
