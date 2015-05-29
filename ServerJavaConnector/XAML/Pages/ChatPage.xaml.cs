@@ -69,7 +69,7 @@ namespace ServerJavaConnector.XAML.Pages
 
         public void WriteLine(String msg)
         {
-            WriteLine(msg, Brushes.LightGreen);
+            WriteLine(msg, null);
         }
 
         public void WriteLine(String msg, Brush color)
@@ -81,6 +81,7 @@ namespace ServerJavaConnector.XAML.Pages
             TextRange tr = new TextRange(ConsoleBoxV.Document.ContentEnd, ConsoleBoxV.Document.ContentEnd);
             tr.Text = msg;
             tr.ApplyPropertyValue(TextElement.ForegroundProperty, color);
+            ConsoleBoxV.Width = ConsoleBoxV.ActualWidth;
             ConsoleBoxV.AppendText("\n");
         }
 

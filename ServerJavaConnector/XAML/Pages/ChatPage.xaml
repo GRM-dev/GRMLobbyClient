@@ -16,14 +16,14 @@
             <RowDefinition MinHeight="100"/>
             <RowDefinition MaxHeight="40"/>
         </Grid.RowDefinitions>
-        <RichTextBox x:Name="ConsoleBoxV" Background="Black" Foreground="#FF5DFF00" IsReadOnly="True" SelectionBrush="#FF9E9E9E" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto" UseLayoutRounding="True" MinHeight="200"/>
-        <Grid Margin="0" UseLayoutRounding="True" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Auto" MinWidth="120">
-            <TextBox x:Name="ConsoleInput" TextWrapping="Wrap" Foreground="#FF5DFF00" Background="Black" Margin="0" IsEnabled="{DynamicResource Connected}" KeyUp="Button_Press" CaretBrush="Red" MinWidth="100" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" MinHeight="0" Grid.IsSharedSizeScope="True" >
+        <RichTextBox x:Name="ConsoleBoxV" Background="Black" Foreground="#FF5DFF00" IsReadOnly="True" SelectionBrush="#FF9E9E9E" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto" UseLayoutRounding="True" MinHeight="200" MinWidth="30"/>
+        <Grid Margin="0" UseLayoutRounding="True" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Auto" MinWidth="120" Grid.IsSharedSizeScope="True">
+            <TextBox x:Name="ConsoleInput" TextWrapping="Wrap" Foreground="#FF5DFF00" Background="Black" Margin="0" IsEnabled="{DynamicResource Connected}" KeyUp="Button_Press" CaretBrush="Red" MinWidth="100" VerticalContentAlignment="Stretch" MinHeight="0" SpellCheck.IsEnabled="True" >
                 <TextBox.InputBindings>
                     <KeyBinding Command="{Binding Send_Button_Click}" Key="Enter" />
                 </TextBox.InputBindings>
             </TextBox>
-            <Button x:Name="Send_Button" Content="Send" Click="Send_Button_Click" FontWeight="Bold" BorderBrush="#FF0017FF" Foreground="White" Background="{DynamicResource RedStyleButtonBrush}" IsEnabled="{DynamicResource Connected}" IsDefault="True" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Padding="5,6" HorizontalAlignment="Right"/>
+            <Button x:Name="Send_Button" Content="Send" Click="Send_Button_Click" FontWeight="Bold" BorderBrush="#FF0017FF" Foreground="White" Background="{DynamicResource RedStyleButtonBrush}" IsEnabled="{DynamicResource Connected}" IsDefault="True" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Padding="5,6" MinWidth="30" HorizontalAlignment="Right"/>
         </Grid>
     </Grid>
 </Page>

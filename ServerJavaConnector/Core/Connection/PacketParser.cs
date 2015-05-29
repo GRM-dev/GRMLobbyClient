@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using ServerJavaConnector.XAML.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -42,7 +43,7 @@ namespace ServerJavaConnector.Core.Connection
             return str.ToString();
         }
 
-        public static void sendPacket(string msg, Socket clientSocket)
+        public static bool sendPacket(string msg, Socket clientSocket)
         {
             if (!clientSocket.Connected)
             {
@@ -50,14 +51,23 @@ namespace ServerJavaConnector.Core.Connection
             }
             if (msg.Length > 0)
             {
-                NetworkStream stream = new NetworkStream(clientSocket);
-                byte[] outBMsg = Encoding.UTF8.GetBytes(msg);
-                byte[] outB = new byte[outBMsg.Length + 4];
-                byte[] outLenB = System.BitConverter.GetBytes(msg.Length + 4);
-                outLenB.CopyTo(outB, 0);
-                outBMsg.CopyTo(outB, 4);
-                stream.Write(outB, 0, outB.Length);
+                try
+                {
+                    NetworkStream stream = new NetworkStream(clientSocket);
+                    byte[] outBMsg = Encoding.UTF8.GetBytes(msg);
+                    byte[] outB = new byte[outBMsg.Length + 4];
+                    byte[] outLenB = System.BitConverter.GetBytes(msg.Length + 4);
+                    outLenB.CopyTo(outB, 0);
+                    outBMsg.CopyTo(outB, 4);
+                    stream.Write(outB, 0, outB.Length);
+                    return true;
+                }
+                catch (IOException e)
+                {
+                    CDialogManager.ShowExceptionDialog(e, "Error while sending msg");
+                }
             }
+            return false;
         }
     }
 }

@@ -6,7 +6,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:Pages="clr-namespace:ServerJavaConnector.XAML.Pages"
         x:Class="ServerJavaConnector.MainWindow"
-        Title="Java Chat Client" Height="600" Width="800" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" ScrollViewer.VerticalScrollBarVisibility="Auto" RightWindowCommandsOverlayBehavior="Flyouts" SaveWindowPosition="True" EnableDWMDropShadow="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" WindowStyle="ThreeDBorderWindow" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ScrollViewer.CanContentScroll="True">
+        Title="GRM-Lobby Client" Height="600" Width="800" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" ScrollViewer.VerticalScrollBarVisibility="Auto" RightWindowCommandsOverlayBehavior="Flyouts" SaveWindowPosition="True" EnableDWMDropShadow="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" WindowStyle="ThreeDBorderWindow" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ScrollViewer.CanContentScroll="True">
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button Content="Settings" Click="Settings_Button_Click" />
