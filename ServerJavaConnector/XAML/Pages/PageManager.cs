@@ -1,4 +1,4 @@
-﻿using ServerJavaConnector.XAML;
+﻿using GRMLobbyClient.XAML;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 
-namespace ServerJavaConnector.XAML.Pages
+namespace GRMLobbyClient.XAML.Pages
 {
     /// <summary>
     /// Manages pages in frames contained in window

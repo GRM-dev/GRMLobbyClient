@@ -1,13 +1,13 @@
 ﻿using MahApps.Metro.Controls;
-using ServerJavaConnector.Core.Commander;
-using ServerJavaConnector.Core.Connection;
-using ServerJavaConnector.XAML.Dialogs;
-using ServerJavaConnector.XAML.Pages;
+using GRMLobbyClient.Core.Commander;
+using GRMLobbyClient.Core.Connection;
+using GRMLobbyClient.XAML.Dialogs;
+using GRMLobbyClient.XAML.Pages;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 
-namespace ServerJavaConnector
+namespace GRMLobbyClient
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

@@ -1,7 +1,7 @@
 ﻿using MahApps.Metro.Controls;
-using ServerJavaConnector.Core.Connection;
-using ServerJavaConnector.XAML.Dialogs;
-using ServerJavaConnector.XAML.Pages;
+using GRMLobbyClient.Core.Connection;
+using GRMLobbyClient.XAML.Dialogs;
+using GRMLobbyClient.XAML.Pages;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ServerJavaConnector.XAML.Pages
+namespace GRMLobbyClient.XAML.Pages
 {
     public partial class LoginPage
     {

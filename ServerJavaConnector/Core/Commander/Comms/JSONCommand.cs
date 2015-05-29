@@ -1,7 +1,7 @@
 ﻿using System;
-using ServerJavaConnector.Core.Connection;
+using GRMLobbyClient.Core.Connection;
 
-namespace ServerJavaConnector.Core.Commander.Comms
+namespace GRMLobbyClient.Core.Commander.Comms
 {
     internal class JSONCommand : Command
     {

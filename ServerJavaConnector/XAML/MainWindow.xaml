@@ -2,10 +2,10 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:System="clr-namespace:System;assembly=mscorlib" 
-        xmlns:Core="clr-namespace:ServerJavaConnector.Core" 
+        xmlns:Core="clr-namespace:GRMLobbyClient.Core" 
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        xmlns:Pages="clr-namespace:ServerJavaConnector.XAML.Pages"
-        x:Class="ServerJavaConnector.MainWindow"
+        xmlns:Pages="clr-namespace:GRMLobbyClient.XAML.Pages"
+        x:Class="GRMLobbyClient.MainWindow"
         Title="GRM-Lobby Client" Height="600" Width="800" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" UseLayoutRounding="True" ScrollViewer.VerticalScrollBarVisibility="Auto" RightWindowCommandsOverlayBehavior="Flyouts" SaveWindowPosition="True" EnableDWMDropShadow="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" WindowStyle="ThreeDBorderWindow" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ScrollViewer.CanContentScroll="True">
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>

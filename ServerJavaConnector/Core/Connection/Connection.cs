@@ -1,12 +1,12 @@
-﻿using ServerJavaConnector.Core.Commander;
-using ServerJavaConnector.XAML.Dialogs;
-using ServerJavaConnector.XAML.Pages;
+﻿using GRMLobbyClient.Core.Commander;
+using GRMLobbyClient.XAML.Dialogs;
+using GRMLobbyClient.XAML.Pages;
 using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 
-namespace ServerJavaConnector.Core.Connection
+namespace GRMLobbyClient.Core.Connection
 {
     public class Connection
     {

@@ -1,10 +1,10 @@
-﻿using ServerJavaConnector.Core.Connection;
-using ServerJavaConnector.XAML.Dialogs;
+﻿using GRMLobbyClient.Core.Connection;
+using GRMLobbyClient.XAML.Dialogs;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace ServerJavaConnector.XAML.Pages
+namespace GRMLobbyClient.XAML.Pages
 {
     public partial class MainPage : Page, INotifyPropertyChanged
     {

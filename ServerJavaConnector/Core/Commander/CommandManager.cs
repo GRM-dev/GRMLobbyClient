@@ -1,9 +1,9 @@
-﻿using ServerJavaConnector.Core.Commander.Comms;
+﻿using GRMLobbyClient.Core.Commander.Comms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ServerJavaConnector.Core.Commander
+namespace GRMLobbyClient.Core.Commander
 {
     public class CommandManager
     {
@@ -40,15 +40,17 @@ namespace ServerJavaConnector.Core.Commander
         {
             Console.WriteLine("......|trying to execute: " + command + "|.........");
             Commands comm;
-            try {
-                 comm = Command.GetEnumCommand(command); }
-            catch(Exception e)
+            try
+            {
+                comm = Command.GetEnumCommand(command);
+            }
+            catch (Exception e)
             {
                 comm = Commands.ERROR;
                 Console.WriteLine(e.Message);
             }
             String args = Command.Offset(command);
-            return ExecuteCommand(comm, args, conn, false);
+            return ExecuteCommand(comm, args, conn, invokedByServer);
         }
 
         public Boolean ExecuteCommand(Commands command, Connection.Connection connection)
@@ -63,7 +65,7 @@ namespace ServerJavaConnector.Core.Commander
             {
                 return false;
             }
-            return comm.executeCommand(args,conn,invokedByServer);
+            return comm.executeCommand(args, conn, invokedByServer);
         }
 
         public void AddCommandToList(String input)

@@ -1,8 +1,8 @@
 ﻿using System;
-using ServerJavaConnector.Core.Connection;
-using ServerJavaConnector.XAML.Dialogs;
+using GRMLobbyClient.Core.Connection;
+using GRMLobbyClient.XAML.Dialogs;
 
-namespace ServerJavaConnector.Core.Commander.Comms
+namespace GRMLobbyClient.Core.Commander.Comms
 {
     internal class CLOSECommand : Command
     {

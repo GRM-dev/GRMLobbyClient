@@ -1,7 +1,7 @@
 ﻿using System;
-using ServerJavaConnector.Core.Connection;
+using GRMLobbyClient.Core.Connection;
 
-namespace ServerJavaConnector.Core.Commander.Comms
+namespace GRMLobbyClient.Core.Commander.Comms
 {
     internal class CLOSECONNCommand : Command
     {
@@ -11,7 +11,14 @@ namespace ServerJavaConnector.Core.Commander.Comms
 
         public override bool executeCommand(string args = null, Connection.Connection conn = null, bool invokedByServer = false)
         {
-            PacketParser.sendPacket(Command.GetCommand(Commands.CLOSECONN).CommandString + args, conn.ClientSocket);
+            if (invokedByServer)
+            {
+                MainWindow.instance.Conn.Disconnect();
+            }
+            else
+            {
+                PacketParser.sendPacket(Command.GetCommand(Commands.CLOSECONN).CommandString + args, conn.ClientSocket);
+            }
             return true;
         }
     }

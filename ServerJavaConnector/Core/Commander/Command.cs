@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServerJavaConnector.Core.Commander
+namespace GRMLobbyClient.Core.Commander
 {
     public abstract class Command
     {

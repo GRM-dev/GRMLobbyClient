@@ -1,9 +1,9 @@
-﻿using ServerJavaConnector.XAML.Dialogs;
+﻿using GRMLobbyClient.XAML.Dialogs;
 using System;
 using System.IO;
 using System.Threading;
 
-namespace ServerJavaConnector.Core.Connection
+namespace GRMLobbyClient.Core.Connection
 {
     public class WebMessageListener
     {

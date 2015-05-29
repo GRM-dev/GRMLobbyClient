@@ -1,8 +1,8 @@
 ﻿using System;
-using ServerJavaConnector.Core.Connection;
-using ServerJavaConnector.XAML.Pages;
+using GRMLobbyClient.Core.Connection;
+using GRMLobbyClient.XAML.Pages;
 
-namespace ServerJavaConnector.Core.Commander.Comms
+namespace GRMLobbyClient.Core.Commander.Comms
 {
     internal class MSGCommand : Command
     {

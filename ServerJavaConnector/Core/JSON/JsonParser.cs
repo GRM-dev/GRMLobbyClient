@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using ServerJavaConnector.Core.Connection;
+using GRMLobbyClient.Core.Connection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServerJavaConnector.Core.JSON
+namespace GRMLobbyClient.Core.JSON
 {
     public class JsonParser
     {

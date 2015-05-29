@@ -5,7 +5,7 @@ using SharpGL.SceneGraph.Shaders;
 using System;
 using System.Windows.Controls;
 
-namespace ServerJavaConnector.XAML.Pages
+namespace GRMLobbyClient.XAML.Pages
 {
     /// <summary>
     /// Interaction logic for GLPage.xaml

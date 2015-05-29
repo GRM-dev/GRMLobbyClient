@@ -1,4 +1,4 @@
-﻿namespace ServerJavaConnector.Core.Commander
+﻿namespace GRMLobbyClient.Core.Commander
 {
     public enum Commands
     {

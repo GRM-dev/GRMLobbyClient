@@ -2,8 +2,8 @@
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 	<ResourceDictionary.MergedDictionaries>
-		<ResourceDictionary Source="/ServerJavaConnector;component/XAML/AppLocalDictionary.xaml"/>
-		<ResourceDictionary Source="/ServerJavaConnector;component/Resources/Icons.xaml"/>
+		<ResourceDictionary Source="/GRMLobbyClient;component/XAML/AppLocalDictionary.xaml"/>
+		<ResourceDictionary Source="/GRMLobbyClient;component/Resources/Icons.xaml"/>
 	</ResourceDictionary.MergedDictionaries>
 	<!-- Resource dictionary entries should be defined here. -->
 </ResourceDictionary>

@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using ServerJavaConnector.XAML.Dialogs;
+using GRMLobbyClient.XAML.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ServerJavaConnector.Core.Connection
+namespace GRMLobbyClient.Core.Connection
 {
     public static class PacketParser
     {

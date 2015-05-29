@@ -1,6 +1,6 @@
 ﻿using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
-using ServerJavaConnector.XAML.Pages;
+using GRMLobbyClient.XAML.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
-namespace ServerJavaConnector.XAML.Dialogs
+namespace GRMLobbyClient.XAML.Dialogs
 {
     public static class CDialogManager
     {

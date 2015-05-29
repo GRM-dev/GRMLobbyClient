@@ -1,6 +1,6 @@
-﻿using ServerJavaConnector.Core.Commander;
-using ServerJavaConnector.Core.Connection;
-using ServerJavaConnector.XAML.Dialogs;
+﻿using GRMLobbyClient.Core.Commander;
+using GRMLobbyClient.Core.Connection;
+using GRMLobbyClient.XAML.Dialogs;
 using System;
 using System.ComponentModel;
 using System.Windows;
@@ -10,7 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 
-namespace ServerJavaConnector.XAML.Pages
+namespace GRMLobbyClient.XAML.Pages
 {
     /// <summary>
     /// Interaction logic for ChatPage.xaml
